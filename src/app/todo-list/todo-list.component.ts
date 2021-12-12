@@ -11,6 +11,7 @@ import { Todo } from '../todo';
 export class TodoListComponent implements OnInit {
   selectedTodo?: number;
   todos?: Todo[];
+  input: boolean = false;
 
   constructor(private todoService: TodoService) {}
 
@@ -61,7 +62,18 @@ export class TodoListComponent implements OnInit {
     }
   }
 
+  @HostListener('document:keydown.control.arrowdown')
+  showInput() {
+    this.input = true;
+  }
+
+  @HostListener('document:keydown.control.arrowup')
+  hideInput() {
+    this.input = false;
+  }
+
   newTodo(label: string) {
     this.todoService.addTodo(label).subscribe();
+    this.input = false;
   }
 }

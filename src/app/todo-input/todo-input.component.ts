@@ -8,6 +8,7 @@ import { Todo } from '../todo';
 })
 export class TodoInputComponent implements OnInit {
   @Output() newTodo = new EventEmitter<string>();
+  @Output() cancel = new EventEmitter();
   label?: string;
 
   constructor() {}
@@ -19,5 +20,9 @@ export class TodoInputComponent implements OnInit {
       this.newTodo.emit(this.label);
       this.label = undefined;
     }
+  }
+
+  emitCancel() {
+    this.cancel.emit();
   }
 }

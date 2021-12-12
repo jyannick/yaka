@@ -6,4 +6,8 @@
     ></yaka-todo-item>
   </li>
 </ul>
-<yaka-todo-input (newTodo)="newTodo($event)"></yaka-todo-input>
+<yaka-todo-input
+  *ngIf="input"
+  (newTodo)="newTodo($event)"
+  (cancel)="hideInput()"
+></yaka-todo-input>

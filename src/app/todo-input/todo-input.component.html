@@ -1,6 +1,7 @@
 <input
   [(ngModel)]="label"
   (keyup.control.enter)="createTodo()"
+  (blur)="emitCancel()"
   placeholder="yaka"
   autofocus
 />
