@@ -1,3 +1,7 @@
-<div *ngIf="todo" [ngClass]="selected ? 'selected' : ''">
-  <span>🔳 {{ todo.label }}</span>
+<div *ngIf="todo" class="todo-line" [ngClass]="selected ? 'selected' : ''">
+  <span *ngIf="todo.done">✅</span>
+  <span *ngIf="!todo.done">🔳</span>
+  <span class="todo-text" [ngClass]="todo.done ? 'done' : ''">{{
+    todo.label
+  }}</span>
 </div>

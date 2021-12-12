@@ -8,9 +8,9 @@ import { Todo } from '../todo';
 })
 export class TodoListComponent implements OnInit {
   todos: Todo[] = [
-    { id: 1, label: 'finish this app' },
-    { id: 2, label: 'get famous' },
-    { id: 3, label: 'enjoy' },
+    { id: 1, label: 'finish this app', done: false },
+    { id: 2, label: 'get famous', done: false },
+    { id: 3, label: 'enjoy', done: false },
   ];
 
   selectedTodo?: number;
@@ -40,6 +40,30 @@ export class TodoListComponent implements OnInit {
     }
     if (this.selectedTodo > this.todos[0].id) {
       this.selectedTodo--;
+    }
+  }
+
+  @HostListener('document:keydown.control.arrowright')
+  @HostListener('document:keydown.enter')
+  markAsDone() {
+    if (!this.selectedTodo) {
+      return;
+    }
+    var selected = this.todos.find((t) => t.id === this.selectedTodo);
+    if (selected) {
+      selected.done = true;
+    }
+  }
+
+  @HostListener('document:keydown.control.arrowleft')
+  @HostListener('document:keydown.shift.enter')
+  unmarkAsDone() {
+    if (!this.selectedTodo) {
+      return;
+    }
+    var selected = this.todos.find((t) => t.id === this.selectedTodo);
+    if (selected) {
+      selected.done = false;
     }
   }
 }
