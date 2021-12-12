@@ -24,7 +24,11 @@ export class TodoListComponent implements OnInit {
   @HostListener('document:keydown.control.j', ['$event'])
   selectNextTodo(event?: Event) {
     event?.preventDefault();
-    if (!this.todos || !this.selectedTodo) {
+    if (!this.todos) {
+      return;
+    }
+    if (!this.selectedTodo) {
+      this.selectedTodo = 1;
       return;
     }
     if (this.selectedTodo < this.todos[this.todos.length - 1].id) {
@@ -36,12 +40,22 @@ export class TodoListComponent implements OnInit {
   @HostListener('document:keydown.control.k', ['$event'])
   selectPreviousTodo(event?: Event) {
     event?.preventDefault();
-    if (!this.todos || !this.selectedTodo) {
+    if (!this.todos) {
+      return;
+    }
+    if (!this.selectedTodo) {
+      this.selectedTodo = this.todos[this.todos.length - 1].id;
       return;
     }
     if (this.selectedTodo > this.todos[0].id) {
       this.selectedTodo--;
     }
+  }
+
+  @HostListener('document:keydown.escape', ['$event'])
+  selectNone(event?: Event) {
+    event?.preventDefault();
+    this.selectedTodo = undefined;
   }
 
   @HostListener('document:keydown.control.d', ['$event'])
@@ -53,6 +67,7 @@ export class TodoListComponent implements OnInit {
     var selected = this.todos.find((t) => t.id === this.selectedTodo);
     if (selected) {
       selected.done = true;
+      this.todoService.save(this.todos);
     }
   }
 
@@ -65,6 +80,7 @@ export class TodoListComponent implements OnInit {
     var selected = this.todos.find((t) => t.id === this.selectedTodo);
     if (selected) {
       selected.done = false;
+      this.todoService.save(this.todos);
     }
   }
 
@@ -78,6 +94,12 @@ export class TodoListComponent implements OnInit {
   hideInput(event?: Event) {
     event?.preventDefault();
     this.input = false;
+  }
+
+  @HostListener('document:keydown.control.shift.delete', ['$event'])
+  clearAll(event?: Event) {
+    event?.preventDefault();
+    this.todoService.clearAll().subscribe((todos) => (this.todos = todos));
   }
 
   newTodo(label: string) {
