@@ -1,4 +1,6 @@
 import { Component, HostListener, OnInit } from '@angular/core';
+
+import { TodoService } from '../todo.service';
 import { Todo } from '../todo';
 
 @Component({
@@ -7,24 +9,19 @@ import { Todo } from '../todo';
   styleUrls: ['./todo-list.component.css'],
 })
 export class TodoListComponent implements OnInit {
-  todos: Todo[] = [
-    { id: 1, label: 'finish this app', done: false },
-    { id: 2, label: 'get famous', done: false },
-    { id: 3, label: 'enjoy', done: false },
-  ];
-
   selectedTodo?: number;
+  todos?: Todo[];
 
-  constructor() {}
+  constructor(private todoService: TodoService) {}
 
   ngOnInit(): void {
     this.selectedTodo = 1;
+    this.todoService.getTodos().subscribe((todos) => (this.todos = todos));
   }
 
   @HostListener('document:keydown.arrowdown')
-  @HostListener('document:keydown.n')
   selectNextTodo() {
-    if (!this.selectedTodo) {
+    if (!this.todos || !this.selectedTodo) {
       return;
     }
     if (this.selectedTodo < this.todos[this.todos.length - 1].id) {
@@ -33,9 +30,8 @@ export class TodoListComponent implements OnInit {
   }
 
   @HostListener('document:keydown.arrowup')
-  @HostListener('document:keydown.p')
   selectPreviousTodo() {
-    if (!this.selectedTodo) {
+    if (!this.todos || !this.selectedTodo) {
       return;
     }
     if (this.selectedTodo > this.todos[0].id) {
@@ -44,9 +40,8 @@ export class TodoListComponent implements OnInit {
   }
 
   @HostListener('document:keydown.control.arrowright')
-  @HostListener('document:keydown.enter')
   markAsDone() {
-    if (!this.selectedTodo) {
+    if (!this.todos || !this.selectedTodo) {
       return;
     }
     var selected = this.todos.find((t) => t.id === this.selectedTodo);
@@ -56,14 +51,17 @@ export class TodoListComponent implements OnInit {
   }
 
   @HostListener('document:keydown.control.arrowleft')
-  @HostListener('document:keydown.shift.enter')
   unmarkAsDone() {
-    if (!this.selectedTodo) {
+    if (!this.todos || !this.selectedTodo) {
       return;
     }
     var selected = this.todos.find((t) => t.id === this.selectedTodo);
     if (selected) {
       selected.done = false;
     }
+  }
+
+  newTodo(label: string) {
+    this.todoService.addTodo(label).subscribe();
   }
 }
