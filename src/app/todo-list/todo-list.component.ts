@@ -20,8 +20,10 @@ export class TodoListComponent implements OnInit {
     this.todoService.getTodos().subscribe((todos) => (this.todos = todos));
   }
 
-  @HostListener('document:keydown.arrowdown')
-  selectNextTodo() {
+  @HostListener('document:keydown.arrowdown', ['$event'])
+  @HostListener('document:keydown.control.j', ['$event'])
+  selectNextTodo(event?: Event) {
+    event?.preventDefault();
     if (!this.todos || !this.selectedTodo) {
       return;
     }
@@ -30,8 +32,10 @@ export class TodoListComponent implements OnInit {
     }
   }
 
-  @HostListener('document:keydown.arrowup')
-  selectPreviousTodo() {
+  @HostListener('document:keydown.arrowup', ['$event'])
+  @HostListener('document:keydown.control.k', ['$event'])
+  selectPreviousTodo(event?: Event) {
+    event?.preventDefault();
     if (!this.todos || !this.selectedTodo) {
       return;
     }
@@ -40,8 +44,9 @@ export class TodoListComponent implements OnInit {
     }
   }
 
-  @HostListener('document:keydown.control.arrowright')
-  markAsDone() {
+  @HostListener('document:keydown.control.d', ['$event'])
+  markAsDone(event?: Event) {
+    event?.preventDefault();
     if (!this.todos || !this.selectedTodo) {
       return;
     }
@@ -51,8 +56,9 @@ export class TodoListComponent implements OnInit {
     }
   }
 
-  @HostListener('document:keydown.control.arrowleft')
-  unmarkAsDone() {
+  @HostListener('document:keydown.control.shift.d', ['$event'])
+  unmarkAsDone(event?: Event) {
+    event?.preventDefault();
     if (!this.todos || !this.selectedTodo) {
       return;
     }
@@ -62,13 +68,15 @@ export class TodoListComponent implements OnInit {
     }
   }
 
-  @HostListener('document:keydown.control.arrowdown')
-  showInput() {
+  @HostListener('document:keydown.control.arrowdown', ['$event'])
+  showInput(event?: Event) {
+    event?.preventDefault();
     this.input = true;
   }
 
-  @HostListener('document:keydown.control.arrowup')
-  hideInput() {
+  @HostListener('document:keydown.control.arrowup', ['$event'])
+  hideInput(event?: Event) {
+    event?.preventDefault();
     this.input = false;
   }
 
