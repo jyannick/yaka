@@ -8,6 +8,7 @@ import { Todo } from '../todo';
 })
 export class TodoItemComponent implements OnInit {
   @Input() todo?: Todo;
+  @Input() selected?: boolean;
 
   constructor() {}
 

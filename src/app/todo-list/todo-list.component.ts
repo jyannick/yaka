@@ -12,7 +12,11 @@ export class TodoListComponent implements OnInit {
     { id: 2, label: 'enjoy' },
   ];
 
+  selectedTodo?: number;
+
   constructor() {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.selectedTodo = 1;
+  }
 }

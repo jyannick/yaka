@@ -1,5 +1,8 @@
 <ul class="todos">
   <li *ngFor="let todo of todos">
-    <yaka-todo-item [todo]="todo"></yaka-todo-item>
+    <yaka-todo-item
+      [todo]="todo"
+      [selected]="todo.id === selectedTodo"
+    ></yaka-todo-item>
   </li>
 </ul>
