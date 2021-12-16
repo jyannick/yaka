@@ -84,16 +84,31 @@ export class TodoListComponent implements OnInit {
     }
   }
 
-  @HostListener('document:keydown.control.arrowdown', ['$event'])
+  @HostListener('document:keydown.control.space', ['$event'])
+  toggleInput(event?: Event) {
+    event?.preventDefault();
+    if (this.input) {
+      this.hideInput();
+    } else {
+      this.showInput();
+    }
+  }
+
   showInput(event?: Event) {
     event?.preventDefault();
+    this.hideSelection();
     this.input = true;
   }
 
-  @HostListener('document:keydown.control.arrowup', ['$event'])
+  @HostListener('document:keydown.escape', ['$event'])
   hideInput(event?: Event) {
     event?.preventDefault();
     this.input = false;
+  }
+
+  @HostListener('document:keydown.escape', ['$event'])
+  hideSelection(): void {
+    this.selectedTodo = undefined;
   }
 
   @HostListener('document:keydown.control.shift.delete', ['$event'])
