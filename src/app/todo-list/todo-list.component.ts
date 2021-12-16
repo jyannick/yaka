@@ -56,9 +56,9 @@ export class TodoListComponent implements OnInit {
   }
 
   @HostListener('document:keydown.escape', ['$event'])
-  selectNone(event?: Event) {
+  userPressedEscape(event?: Event) {
     event?.preventDefault();
-    this.selectedTodo = undefined;
+    this.input ? this.hideInput() : this.selectNone();
   }
 
   @HostListener('document:keydown.control.d', ['$event'])
@@ -95,10 +95,13 @@ export class TodoListComponent implements OnInit {
     this.input = true;
   }
 
-  @HostListener('document:keydown.escape', ['$event'])
   hideInput(event?: Event) {
     event?.preventDefault();
     this.input = false;
+  }
+
+  selectNone() {
+    this.selectedTodo = undefined;
   }
 
   @HostListener('document:keydown.control.delete', ['$event'])
