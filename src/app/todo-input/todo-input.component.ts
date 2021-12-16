@@ -1,19 +1,16 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
-import { Todo } from '../todo';
+import { Component, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'yaka-todo-input',
   templateUrl: './todo-input.component.html',
   styleUrls: ['./todo-input.component.css'],
 })
-export class TodoInputComponent implements OnInit {
+export class TodoInputComponent {
   @Output() newTodo = new EventEmitter<string>();
   @Output() cancel = new EventEmitter();
   label?: string;
 
   constructor() {}
-
-  ngOnInit(): void {}
 
   createTodo() {
     if (this.label) {

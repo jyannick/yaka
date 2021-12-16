@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { Todo } from '../todo';
 
 @Component({
@@ -6,15 +6,13 @@ import { Todo } from '../todo';
   templateUrl: './todo-item.component.html',
   styleUrls: ['./todo-item.component.css'],
 })
-export class TodoItemComponent implements OnInit {
+export class TodoItemComponent {
   @Input() todo?: Todo;
   @Input() selected?: boolean;
   @Output() doneEvent = new EventEmitter();
   @Output() undoneEvent = new EventEmitter();
 
   constructor() {}
-
-  ngOnInit(): void {}
 
   emitDone() {
     this.doneEvent.emit();
