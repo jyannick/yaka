@@ -30,12 +30,12 @@ export class TodoService {
   }
 
   addTodo(label: string): Observable<Todo> {
-    if (!this.todos) {
+    if (this.todos === undefined) {
       console.error('addTodo() called before loading data');
       return of();
     }
     const newTodo = <Todo>{
-      id: this.todos[this.todos.length - 1].id + 1,
+      id: this.generateId(),
       label: label,
       done: false,
     };
@@ -44,9 +44,20 @@ export class TodoService {
     return of(newTodo);
   }
 
-  clearAll(): Observable<Todo[]> {
-    localStorage.removeItem(LOCAL_STORAGE_ITEM);
-    this.loadLocalStorage();
+  deleteIfDone(index: number) {
+    if (this.todos && this.todos[index].done) {
+      this.todos?.splice(index, 1);
+      this.saveLocalStorage();
+    }
+  }
+
+  clearAllDone(): Observable<Todo[]> {
+    if (!this.todos) {
+      return this.getTodos();
+    }
+    for (var [index, _] of this.todos?.entries()) {
+      this.deleteIfDone(index);
+    }
     return this.getTodos();
   }
 
@@ -59,5 +70,15 @@ export class TodoService {
 
   private saveLocalStorage() {
     localStorage.setItem(LOCAL_STORAGE_ITEM, JSON.stringify(this.todos));
+  }
+
+  private generateId(): number {
+    if (this.todos === undefined) {
+      console.error('generateId() called before loading data');
+      return 1;
+    }
+    return this.todos?.length > 0
+      ? this.todos[this.todos.length - 1].id + 1
+      : 1;
   }
 }

@@ -109,11 +109,19 @@ export class TodoListComponent implements OnInit {
     this.input = false;
   }
 
+  @HostListener('document:keydown.control.delete', ['$event'])
+  deleteSelectedTodoIfDone(event?: Event) {
+    event?.preventDefault();
+    if (this.selectedTodo !== undefined) {
+      this.todoService.deleteIfDone(this.selectedTodo);
+    }
+  }
+
   @HostListener('document:keydown.control.shift.delete', ['$event'])
-  clearAll(event?: Event) {
+  clearAllDone(event?: Event) {
     event?.preventDefault();
     this.selectNone();
-    this.todoService.clearAll().subscribe((todos) => (this.todos = todos));
+    this.todoService.clearAllDone().subscribe((todos) => (this.todos = todos));
   }
 
   newTodo(label: string) {
