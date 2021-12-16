@@ -1,12 +1,21 @@
+.todo-line {
+  padding: 2px;
+}
+
+.checkbox {
+  cursor: pointer;
+}
+
+.todo-text {
+  margin-left: 0.2rem;
+}
+
 .selected {
-  background-color: rgb(46, 111, 197);
+  background-color: #007acc;
+  border-radius: 5px;
 }
 
 .done {
   text-decoration: line-through;
   color: grey;
-}
-
-.checkbox {
-  cursor: pointer;
 }
