@@ -16,7 +16,6 @@ export class TodoListComponent implements OnInit {
   constructor(private todoService: TodoService) {}
 
   ngOnInit(): void {
-    this.selectedTodo = 1;
     this.todoService.getTodos().subscribe((todos) => (this.todos = todos));
   }
 
@@ -27,13 +26,15 @@ export class TodoListComponent implements OnInit {
     if (!this.todos) {
       return;
     }
-    if (!this.selectedTodo) {
-      this.selectedTodo = 1;
+    if (this.selectedTodo === undefined) {
+      this.selectedTodo = 0;
       return;
     }
-    if (this.selectedTodo < this.todos[this.todos.length - 1].id) {
-      this.selectedTodo++;
+    if (this.selectedTodo === this.todos.length - 1) {
+      this.selectedTodo = undefined;
+      return;
     }
+    this.selectedTodo++;
   }
 
   @HostListener('document:keydown.arrowup', ['$event'])
@@ -43,13 +44,15 @@ export class TodoListComponent implements OnInit {
     if (!this.todos) {
       return;
     }
-    if (!this.selectedTodo) {
-      this.selectedTodo = this.todos[this.todos.length - 1].id;
+    if (this.selectedTodo === undefined) {
+      this.selectedTodo = this.todos.length - 1;
       return;
     }
-    if (this.selectedTodo > this.todos[0].id) {
-      this.selectedTodo--;
+    if (this.selectedTodo === 0) {
+      this.selectedTodo = undefined;
+      return;
     }
+    this.selectedTodo--;
   }
 
   @HostListener('document:keydown.escape', ['$event'])
@@ -61,10 +64,10 @@ export class TodoListComponent implements OnInit {
   @HostListener('document:keydown.control.d', ['$event'])
   markAsDone(event?: Event) {
     event?.preventDefault();
-    if (!this.todos || !this.selectedTodo) {
+    if (!this.todos || this.selectedTodo === undefined) {
       return;
     }
-    var selected = this.todos.find((t) => t.id === this.selectedTodo);
+    var selected = this.todos[this.selectedTodo];
     if (selected) {
       selected.done = true;
       this.todoService.save(this.todos);
@@ -77,7 +80,7 @@ export class TodoListComponent implements OnInit {
     if (!this.todos || !this.selectedTodo) {
       return;
     }
-    var selected = this.todos.find((t) => t.id === this.selectedTodo);
+    var selected = this.todos[this.selectedTodo];
     if (selected) {
       selected.done = false;
       this.todoService.save(this.todos);
@@ -96,7 +99,7 @@ export class TodoListComponent implements OnInit {
 
   showInput(event?: Event) {
     event?.preventDefault();
-    this.hideSelection();
+    this.selectNone();
     this.input = true;
   }
 
@@ -106,14 +109,10 @@ export class TodoListComponent implements OnInit {
     this.input = false;
   }
 
-  @HostListener('document:keydown.escape', ['$event'])
-  hideSelection(): void {
-    this.selectedTodo = undefined;
-  }
-
   @HostListener('document:keydown.control.shift.delete', ['$event'])
   clearAll(event?: Event) {
     event?.preventDefault();
+    this.selectNone();
     this.todoService.clearAll().subscribe((todos) => (this.todos = todos));
   }
 
