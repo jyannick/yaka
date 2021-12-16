@@ -3,6 +3,8 @@
     <yaka-todo-item
       [todo]="todo"
       [selected]="index === selectedTodo"
+      (doneEvent)="markAsDone(index)"
+      (undoneEvent)="unmarkAsDone(index)"
     ></yaka-todo-item>
   </li>
 </ul>

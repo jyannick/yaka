@@ -6,3 +6,7 @@
   text-decoration: line-through;
   color: grey;
 }
+
+.checkbox {
+  cursor: pointer;
+}

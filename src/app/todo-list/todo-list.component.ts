@@ -62,29 +62,21 @@ export class TodoListComponent implements OnInit {
   }
 
   @HostListener('document:keydown.control.d', ['$event'])
-  markAsDone(event?: Event) {
+  markSelectionAsDone(event?: Event) {
     event?.preventDefault();
-    if (!this.todos || this.selectedTodo === undefined) {
+    if (this.selectedTodo === undefined) {
       return;
     }
-    var selected = this.todos[this.selectedTodo];
-    if (selected) {
-      selected.done = true;
-      this.todoService.save(this.todos);
-    }
+    this.markAsDone(this.selectedTodo);
   }
 
   @HostListener('document:keydown.control.shift.d', ['$event'])
-  unmarkAsDone(event?: Event) {
+  unmarkSelectionAsDone(event?: Event) {
     event?.preventDefault();
-    if (!this.todos || !this.selectedTodo) {
+    if (this.selectedTodo === undefined) {
       return;
     }
-    var selected = this.todos[this.selectedTodo];
-    if (selected) {
-      selected.done = false;
-      this.todoService.save(this.todos);
-    }
+    this.unmarkAsDone(this.selectedTodo);
   }
 
   @HostListener('document:keydown.control.space', ['$event'])
@@ -127,5 +119,21 @@ export class TodoListComponent implements OnInit {
   newTodo(label: string) {
     this.todoService.addTodo(label).subscribe();
     this.input = false;
+  }
+
+  markAsDone(index: number) {
+    if (!this.todos) {
+      return;
+    }
+    this.todos[index].done = true;
+    this.todoService.save(this.todos);
+  }
+
+  unmarkAsDone(index: number) {
+    if (!this.todos) {
+      return;
+    }
+    this.todos[index].done = false;
+    this.todoService.save(this.todos);
   }
 }
