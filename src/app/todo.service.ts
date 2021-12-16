@@ -55,9 +55,9 @@ export class TodoService {
     if (!this.todos) {
       return this.getTodos();
     }
-    for (var [index, _] of this.todos?.entries()) {
-      this.deleteIfDone(index);
-    }
+    const notDoneTodos = this.todos.filter((todo) => todo.done === false);
+    this.todos = notDoneTodos;
+    this.saveLocalStorage();
     return this.getTodos();
   }
 
