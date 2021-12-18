@@ -55,6 +55,10 @@ export class TodoListComponent implements OnInit {
     this.selectedTodo--;
   }
 
+  selectTodo(index: number) {
+    this.selectedTodo = index;
+  }
+
   @HostListener('document:keydown.escape', ['$event'])
   userPressedEscape(event?: Event) {
     event?.preventDefault();

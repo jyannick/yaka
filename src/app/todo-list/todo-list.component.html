@@ -5,6 +5,7 @@
       [selected]="index === selectedTodo"
       (doneEvent)="markAsDone(index)"
       (undoneEvent)="unmarkAsDone(index)"
+      (click)="selectTodo(index)"
     ></yaka-todo-item>
   </li>
 </ul>
