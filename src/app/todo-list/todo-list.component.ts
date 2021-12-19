@@ -10,7 +10,7 @@ import { Todo } from '../todo';
 })
 export class TodoListComponent implements OnInit {
   selectedTodo?: number;
-  todos?: Todo[];
+  todos: Todo[] = [];
   input: boolean = false;
 
   constructor(private todoService: TodoService) {}
@@ -23,9 +23,6 @@ export class TodoListComponent implements OnInit {
   @HostListener('document:keydown.control.j', ['$event'])
   selectNextTodo(event?: Event) {
     event?.preventDefault();
-    if (!this.todos) {
-      return;
-    }
     if (this.selectedTodo === undefined) {
       this.selectedTodo = 0;
       return;
@@ -41,9 +38,6 @@ export class TodoListComponent implements OnInit {
   @HostListener('document:keydown.control.k', ['$event'])
   selectPreviousTodo(event?: Event) {
     event?.preventDefault();
-    if (!this.todos) {
-      return;
-    }
     if (this.selectedTodo === undefined) {
       this.selectedTodo = this.todos.length - 1;
       return;
@@ -129,11 +123,8 @@ export class TodoListComponent implements OnInit {
   }
 
   markAsDone(index: number) {
-    if (!this.todos) {
-      return;
-    }
     this.todos[index].done = true;
-    this.todoService.save(this.todos);
+    this.save();
   }
 
   unmarkAsDone(index: number) {
@@ -141,6 +132,10 @@ export class TodoListComponent implements OnInit {
       return;
     }
     this.todos[index].done = false;
+    this.save();
+  }
+
+  save() {
     this.todoService.save(this.todos);
   }
 }

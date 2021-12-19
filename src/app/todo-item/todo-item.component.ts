@@ -9,16 +9,30 @@ import { Todo } from '../todo';
 export class TodoItemComponent {
   @Input() todo?: Todo;
   @Input() selected?: boolean;
-  @Output() doneEvent = new EventEmitter();
-  @Output() undoneEvent = new EventEmitter();
+  @Output() todoChange = new EventEmitter<Todo>();
 
   constructor() {}
 
-  emitDone() {
-    this.doneEvent.emit();
+  markDone() {
+    this.modifyTodo((todo) => {
+      todo.done = true;
+      return todo;
+    });
   }
 
-  emitUndone() {
-    this.undoneEvent.emit();
+  markUndone() {
+    this.modifyTodo((todo) => {
+      todo.done = false;
+      return todo;
+    });
+  }
+
+  private modifyTodo(operation: (todo: Todo) => Todo) {
+    if (this.todo === undefined) {
+      console.error('modifyTodo() called before initialization');
+      return;
+    }
+    this.todo = operation(this.todo);
+    this.todoChange.emit(this.todo);
   }
 }
