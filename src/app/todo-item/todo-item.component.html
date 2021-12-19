@@ -1,7 +1,19 @@
 <div *ngIf="todo" class="todo-line" [ngClass]="selected ? 'selected' : ''">
   <span *ngIf="todo.done" (click)="markUndone()" class="checkbox">✅</span>
   <span *ngIf="!todo.done" (click)="markDone()" class="checkbox">🔳</span>
-  <span class="todo-text" [ngClass]="todo.done ? 'done' : ''">{{
-    todo.label
-  }}</span>
+  <span
+    *ngIf="!displayEditor()"
+    class="todo-text"
+    [ngClass]="todo.done ? 'done' : ''"
+    (click)="edit()"
+  >
+    {{ todo.label }}
+  </span>
+  <input
+    *ngIf="displayEditor()"
+    [(ngModel)]="todo.label"
+    (blur)="saveLabel()"
+    autofocus
+    (keydown.enter)="saveLabel()"
+  />
 </div>

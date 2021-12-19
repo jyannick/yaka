@@ -4,6 +4,7 @@
       [(todo)]="todos[index]"
       (todoChange)="save()"
       [selected]="index === selectedTodo"
+      [(isEditing)]="isEditing"
       (click)="selectTodo(index)"
     ></yaka-todo-item>
   </li>

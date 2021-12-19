@@ -7,9 +7,24 @@ import { Todo } from '../todo';
   styleUrls: ['./todo-item.component.css'],
 })
 export class TodoItemComponent {
-  @Input() todo?: Todo;
   @Input() selected?: boolean;
+
+  @Input() todo?: Todo;
   @Output() todoChange = new EventEmitter<Todo>();
+
+  private _isEditing: boolean = false;
+
+  @Input()
+  public get isEditing(): boolean {
+    return this._isEditing;
+  }
+
+  public set isEditing(isEditing: boolean) {
+    this._isEditing = isEditing;
+    this.isEditingChange.emit(isEditing);
+  }
+
+  @Output() isEditingChange = new EventEmitter<boolean>();
 
   constructor() {}
 
@@ -27,12 +42,31 @@ export class TodoItemComponent {
     });
   }
 
+  edit() {
+    if (this.selected) {
+      this.isEditing = true;
+    }
+  }
+
   private modifyTodo(operation: (todo: Todo) => Todo) {
     if (this.todo === undefined) {
       console.error('modifyTodo() called before initialization');
       return;
     }
     this.todo = operation(this.todo);
+    this.emitTodoChange();
+  }
+
+  saveLabel() {
+    this.isEditing = false;
+    this.emitTodoChange();
+  }
+
+  emitTodoChange() {
     this.todoChange.emit(this.todo);
+  }
+
+  displayEditor() {
+    return this.selected && this.isEditing;
   }
 }

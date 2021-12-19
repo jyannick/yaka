@@ -9,14 +9,26 @@ import { Todo } from '../todo';
   styleUrls: ['./todo-list.component.css'],
 })
 export class TodoListComponent implements OnInit {
-  selectedTodo?: number;
+  _selectedTodo?: number;
   todos: Todo[] = [];
   input: boolean = false;
+  isEditing: boolean = false;
 
   constructor(private todoService: TodoService) {}
 
   ngOnInit(): void {
     this.todoService.getTodos().subscribe((todos) => (this.todos = todos));
+  }
+
+  get selectedTodo(): number | undefined {
+    return this._selectedTodo;
+  }
+
+  set selectedTodo(index: number | undefined) {
+    if (index !== this.selectedTodo) {
+      this.isEditing = false;
+    }
+    this._selectedTodo = index;
   }
 
   @HostListener('document:keydown.arrowdown', ['$event'])
@@ -49,7 +61,10 @@ export class TodoListComponent implements OnInit {
     this.selectedTodo--;
   }
 
-  selectTodo(index: number) {
+  selectTodo(index: number | undefined) {
+    if (index !== this.selectedTodo) {
+      this.isEditing = false;
+    }
     this.selectedTodo = index;
   }
 
@@ -77,6 +92,15 @@ export class TodoListComponent implements OnInit {
     this.unmarkAsDone(this.selectedTodo);
   }
 
+  @HostListener('document:keydown.control.e', ['$event'])
+  editSelectionLabel(event?: Event) {
+    event?.preventDefault();
+    if (this.selectedTodo === undefined) {
+      return;
+    }
+    this.isEditing = true;
+  }
+
   @HostListener('document:keydown.control.space', ['$event'])
   toggleInput(event?: Event) {
     event?.preventDefault();
@@ -99,7 +123,7 @@ export class TodoListComponent implements OnInit {
   }
 
   selectNone() {
-    this.selectedTodo = undefined;
+    this.selectTodo(undefined);
   }
 
   @HostListener('document:keydown.control.delete', ['$event'])
