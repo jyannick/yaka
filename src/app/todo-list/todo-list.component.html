@@ -10,7 +10,7 @@
   </li>
 </ul>
 <yaka-todo-input
-  *ngIf="input"
+  *ngIf="isInputDisplayed"
   (newTodo)="newTodo($event)"
   (cancel)="hideInput()"
 ></yaka-todo-input>

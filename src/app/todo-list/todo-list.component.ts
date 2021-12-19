@@ -1,4 +1,11 @@
-import { Component, HostListener, OnInit } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  HostListener,
+  Input,
+  OnInit,
+  Output,
+} from '@angular/core';
 
 import { TodoService } from '../todo.service';
 import { Todo } from '../todo';
@@ -9,9 +16,8 @@ import { Todo } from '../todo';
   styleUrls: ['./todo-list.component.css'],
 })
 export class TodoListComponent implements OnInit {
-  _selectedTodo?: number;
   todos: Todo[] = [];
-  input: boolean = false;
+  @Output() isInputDisplayedChange = new EventEmitter<boolean>();
   isEditing: boolean = false;
 
   constructor(private todoService: TodoService) {}
@@ -20,6 +26,8 @@ export class TodoListComponent implements OnInit {
     this.todoService.getTodos().subscribe((todos) => (this.todos = todos));
   }
 
+  _selectedTodo?: number;
+
   get selectedTodo(): number | undefined {
     return this._selectedTodo;
   }
@@ -27,8 +35,22 @@ export class TodoListComponent implements OnInit {
   set selectedTodo(index: number | undefined) {
     if (index !== this.selectedTodo) {
       this.isEditing = false;
+      this.isInputDisplayed = false;
     }
     this._selectedTodo = index;
+  }
+
+  _isInputDisplayed = false;
+
+  get isInputDisplayed() {
+    return this._isInputDisplayed;
+  }
+
+  @Input()
+  set isInputDisplayed(newValue: boolean) {
+    this._isInputDisplayed = newValue;
+    this._selectedTodo = undefined;
+    this.isInputDisplayedChange.emit(newValue);
   }
 
   @HostListener('document:keydown.arrowdown', ['$event'])
@@ -71,7 +93,7 @@ export class TodoListComponent implements OnInit {
   @HostListener('document:keydown.escape', ['$event'])
   userPressedEscape(event?: Event) {
     event?.preventDefault();
-    this.input ? this.hideInput() : this.selectNone();
+    this.isInputDisplayed ? this.hideInput() : this.selectNone();
   }
 
   @HostListener('document:keydown.control.d', ['$event'])
@@ -104,7 +126,7 @@ export class TodoListComponent implements OnInit {
   @HostListener('document:keydown.control.space', ['$event'])
   toggleInput(event?: Event) {
     event?.preventDefault();
-    if (this.input) {
+    if (this.isInputDisplayed) {
       this.hideInput();
     } else {
       this.showInput();
@@ -114,12 +136,12 @@ export class TodoListComponent implements OnInit {
   showInput(event?: Event) {
     event?.preventDefault();
     this.selectNone();
-    this.input = true;
+    this.isInputDisplayed = true;
   }
 
   hideInput(event?: Event) {
     event?.preventDefault();
-    this.input = false;
+    this.isInputDisplayed = false;
   }
 
   selectNone() {
@@ -143,7 +165,7 @@ export class TodoListComponent implements OnInit {
 
   newTodo(label: string) {
     this.todoService.addTodo(label).subscribe();
-    this.input = false;
+    this.isInputDisplayed = false;
   }
 
   markAsDone(index: number) {

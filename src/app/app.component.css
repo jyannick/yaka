@@ -2,4 +2,20 @@ html {
   background-color: #1e1e1e;
   color: #e5e5e5;
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  height: 100%;
+}
+
+body {
+  height: 100%;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.input-toggle {
+  height: 100px;
+  flex-grow: 2;
 }

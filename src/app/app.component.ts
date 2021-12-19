@@ -8,4 +8,13 @@ import { Component, ViewEncapsulation } from '@angular/core';
 })
 export class AppComponent {
   title = 'yaka';
+  todoInput = false;
+
+  showInput() {
+    this.todoInput = true;
+  }
+
+  hideInput() {
+    this.todoInput = false;
+  }
 }

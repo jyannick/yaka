@@ -1,1 +1,5 @@
-<yaka-todo-list></yaka-todo-list>
+<div class="container">
+  <yaka-todo-list [(isInputDisplayed)]="todoInput"></yaka-todo-list>
+  <div *ngIf="!todoInput" (click)="showInput()" class="input-toggle"></div>
+  <div *ngIf="todoInput" (click)="hideInput()" class="input-toggle"></div>
+</div>
