@@ -1,6 +1,15 @@
-<div *ngIf="todo" class="todo-line" [ngClass]="selected ? 'selected' : ''">
-  <span *ngIf="todo.done" (click)="markUndone()" class="checkbox">✅</span>
-  <span *ngIf="!todo.done" (click)="markDone()" class="checkbox">🔳</span>
+<div
+  *ngIf="todo"
+  @fadeIn
+  class="todo-line"
+  [ngClass]="selected ? 'selected' : ''"
+>
+  <span *ngIf="todo.done" (click)="markUndone()" @fadeIn class="checkbox">
+    ✅
+  </span>
+  <span *ngIf="!todo.done" (click)="markDone()" @fadeIn class="checkbox">
+    🔳
+  </span>
   <span
     *ngIf="!displayEditor()"
     class="todo-text"

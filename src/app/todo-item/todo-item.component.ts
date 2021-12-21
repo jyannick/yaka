@@ -1,3 +1,10 @@
+import {
+  animate,
+  state,
+  style,
+  transition,
+  trigger,
+} from '@angular/animations';
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { Todo } from '../todo';
 
@@ -5,6 +12,12 @@ import { Todo } from '../todo';
   selector: 'yaka-todo-item',
   templateUrl: './todo-item.component.html',
   styleUrls: ['./todo-item.component.css'],
+  animations: [
+    trigger('fadeIn', [
+      state('in', style({ opacity: 1 })),
+      transition(':enter', [style({ opacity: 0 }), animate(600)]),
+    ]),
+  ],
 })
 export class TodoItemComponent {
   @Input() selected?: boolean;
