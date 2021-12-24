@@ -1,13 +1,15 @@
 {
   "name": "yaka",
   "version": "0.0.0",
+  "main": "main.js",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "lint": "ng lint"
+    "lint": "ng lint",
+    "electron": "ng build && electron ."
   },
   "private": true,
   "dependencies": {
@@ -38,6 +40,7 @@
     "@typescript-eslint/eslint-plugin": "5.3.0",
     "@typescript-eslint/parser": "5.3.0",
     "angular-cli-ghpages": "^1.0.0",
+    "electron": "^16.0.5",
     "eslint": "^8.2.0",
     "jasmine-core": "~3.10.0",
     "karma": "~6.3.0",
