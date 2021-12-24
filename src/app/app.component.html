@@ -1,4 +1,13 @@
 <div class="container">
+  <div class="toolbar">
+    <span class="logo">Yaka!</span>
+    <rmx-icon
+      name="delete-bin-2-fill"
+      title="Remove all 'done' tasks"
+      (click)="cleanAllDoneTasks()"
+      class="button"
+    ></rmx-icon>
+  </div>
   <yaka-todo-list [(isInputDisplayed)]="todoInput"></yaka-todo-list>
   <div *ngIf="!todoInput" (click)="showInput()" class="input-toggle"></div>
   <div *ngIf="todoInput" (click)="hideInput()" class="input-toggle"></div>

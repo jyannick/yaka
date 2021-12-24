@@ -19,3 +19,23 @@ body {
   height: 100px;
   flex-grow: 2;
 }
+
+.toolbar {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  color: grey;
+}
+
+.logo {
+  font-size: larger;
+}
+
+.button {
+  color: #333333;
+  cursor: pointer;
+}
+
+.button:hover {
+  color: #c0c0c0;
+}
