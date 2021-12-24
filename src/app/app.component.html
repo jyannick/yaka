@@ -7,6 +7,13 @@
       (click)="cleanAllDoneTasks()"
       class="button"
     ></rmx-icon>
+    <a href="https://github.com/jyannick/yaka">
+      <rmx-icon
+        name="git-branch-fill"
+        title="Source code"
+        class="button"
+      ></rmx-icon>
+    </a>
   </div>
   <yaka-todo-list [(isInputDisplayed)]="todoInput"></yaka-todo-list>
   <div *ngIf="!todoInput" (click)="showInput()" class="input-toggle"></div>

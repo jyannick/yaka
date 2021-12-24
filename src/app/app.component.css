@@ -29,11 +29,13 @@ body {
 
 .logo {
   font-size: larger;
+  flex-grow: 1;
 }
 
 .button {
   color: #333333;
   cursor: pointer;
+  margin-left: 0.3rem;
 }
 
 .button:hover {
