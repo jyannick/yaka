@@ -1,0 +1,11 @@
+export const NEXT_ITEM = 'arrowdown';
+export const NEXT_ITEM2 = 'control.j';
+export const PREVIOUS_ITEM = 'arrowup';
+export const PREVIOUS_ITEM2 = 'control.k';
+export const CANCEL = 'escape';
+export const MARK_AS_DONE = 'control.d';
+export const UNMARK_AS_DONE = 'control.shift.d';
+export const EDIT = 'control.e';
+export const TOGGLE_TASK_INPUT = 'control.space';
+export const DELETE_SELECTION = 'control.delete';
+export const DELETE_ALL = 'control.shift.delete';

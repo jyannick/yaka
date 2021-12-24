@@ -9,6 +9,19 @@ import {
 
 import { TodoService } from '../todo.service';
 import { Todo } from '../todo';
+import {
+  CANCEL,
+  DELETE_ALL,
+  DELETE_SELECTION,
+  EDIT,
+  MARK_AS_DONE,
+  NEXT_ITEM,
+  NEXT_ITEM2,
+  PREVIOUS_ITEM,
+  PREVIOUS_ITEM2,
+  TOGGLE_TASK_INPUT,
+  UNMARK_AS_DONE,
+} from '../keyboard-shortcuts';
 
 @Component({
   selector: 'yaka-todo-list',
@@ -55,8 +68,8 @@ export class TodoListComponent implements OnInit {
     this.isInputDisplayedChange.emit(newValue);
   }
 
-  @HostListener('document:keydown.arrowdown', ['$event'])
-  @HostListener('document:keydown.control.j', ['$event'])
+  @HostListener(`document:keydown.${NEXT_ITEM}`, ['$event'])
+  @HostListener(`document:keydown.${NEXT_ITEM2}`, ['$event'])
   selectNextTodo(event?: Event) {
     event?.preventDefault();
     if (this.selectedTodo === undefined) {
@@ -70,8 +83,8 @@ export class TodoListComponent implements OnInit {
     this.selectedTodo++;
   }
 
-  @HostListener('document:keydown.arrowup', ['$event'])
-  @HostListener('document:keydown.control.k', ['$event'])
+  @HostListener(`document:keydown.${PREVIOUS_ITEM}`, ['$event'])
+  @HostListener(`document:keydown.${PREVIOUS_ITEM2}`, ['$event'])
   selectPreviousTodo(event?: Event) {
     event?.preventDefault();
     if (this.selectedTodo === undefined) {
@@ -92,13 +105,13 @@ export class TodoListComponent implements OnInit {
     this.selectedTodo = index;
   }
 
-  @HostListener('document:keydown.escape', ['$event'])
+  @HostListener(`document:keydown.${CANCEL}`, ['$event'])
   userPressedEscape(event?: Event) {
     event?.preventDefault();
     this.isInputDisplayed ? this.hideInput() : this.selectNone();
   }
 
-  @HostListener('document:keydown.control.d', ['$event'])
+  @HostListener(`document:keydown.${MARK_AS_DONE}`, ['$event'])
   markSelectionAsDone(event?: Event) {
     event?.preventDefault();
     if (this.selectedTodo === undefined) {
@@ -107,7 +120,7 @@ export class TodoListComponent implements OnInit {
     this.markAsDone(this.selectedTodo);
   }
 
-  @HostListener('document:keydown.control.shift.d', ['$event'])
+  @HostListener(`document:keydown.${UNMARK_AS_DONE}`, ['$event'])
   unmarkSelectionAsDone(event?: Event) {
     event?.preventDefault();
     if (this.selectedTodo === undefined) {
@@ -116,7 +129,7 @@ export class TodoListComponent implements OnInit {
     this.unmarkAsDone(this.selectedTodo);
   }
 
-  @HostListener('document:keydown.control.e', ['$event'])
+  @HostListener(`document:keydown.${EDIT}`, ['$event'])
   editSelectionLabel(event?: Event) {
     event?.preventDefault();
     if (this.selectedTodo === undefined) {
@@ -125,7 +138,7 @@ export class TodoListComponent implements OnInit {
     this.isEditing = true;
   }
 
-  @HostListener('document:keydown.control.space', ['$event'])
+  @HostListener(`document:keydown.${TOGGLE_TASK_INPUT}`, ['$event'])
   toggleInput(event?: Event) {
     event?.preventDefault();
     if (this.isInputDisplayed) {
@@ -150,7 +163,7 @@ export class TodoListComponent implements OnInit {
     this.selectTodo(undefined);
   }
 
-  @HostListener('document:keydown.control.delete', ['$event'])
+  @HostListener(`document:keydown.${DELETE_SELECTION}`, ['$event'])
   deleteSelectedTodoIfDone(event?: Event) {
     event?.preventDefault();
     if (this.selectedTodo !== undefined) {
@@ -158,7 +171,7 @@ export class TodoListComponent implements OnInit {
     }
   }
 
-  @HostListener('document:keydown.control.shift.delete', ['$event'])
+  @HostListener(`document:keydown.${DELETE_ALL}`, ['$event'])
   clearAllDone(event?: Event) {
     event?.preventDefault();
     this.selectNone();
