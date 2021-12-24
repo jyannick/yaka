@@ -10,6 +10,7 @@ import { TodoService } from './todo.service';
 export class AppComponent {
   title = 'yaka';
   todoInput = false;
+  helpScreen = false;
 
   constructor(private todoService: TodoService) {}
 
@@ -23,5 +24,9 @@ export class AppComponent {
 
   cleanAllDoneTasks() {
     this.todoService.clearAllDone();
+  }
+
+  toggleHelpScreen() {
+    this.helpScreen = !this.helpScreen;
   }
 }
