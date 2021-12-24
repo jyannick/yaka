@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 
-import { Observable, of } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 
 import { Todo } from './todo';
 
@@ -10,55 +10,48 @@ const LOCAL_STORAGE_ITEM = 'yaka-todos';
   providedIn: 'root',
 })
 export class TodoService {
-  todos?: Todo[];
+  todos$ = new BehaviorSubject<Todo[]>([]);
 
   constructor() {
     this.loadLocalStorage();
   }
 
-  getTodos(): Observable<Todo[]> {
-    if (!this.todos) {
-      console.error('getTodos() called before loading data');
-      return of();
-    }
-    return of(this.todos);
+  private get todos(): Todo[] {
+    return this.todos$.value;
+  }
+
+  private set todos(todos: Todo[]) {
+    this.todos$.next(todos);
+    this.saveLocalStorage();
+  }
+
+  getTodosObservable(): Observable<Todo[]> {
+    return this.todos$.asObservable();
   }
 
   save(todos: Todo[]) {
     this.todos = todos;
-    this.saveLocalStorage();
   }
 
-  addTodo(label: string): Observable<Todo> {
-    if (this.todos === undefined) {
-      console.error('addTodo() called before loading data');
-      return of();
-    }
+  addTodo(label: string) {
     const newTodo = <Todo>{
       id: this.generateId(),
       label: label,
       done: false,
     };
     this.todos.push(newTodo);
-    this.saveLocalStorage();
-    return of(newTodo);
   }
 
   deleteIfDone(index: number) {
-    if (this.todos && this.todos[index].done) {
-      this.todos?.splice(index, 1);
-      this.saveLocalStorage();
+    if (this.todos[index].done) {
+      this.todos.splice(index, 1);
     }
   }
 
   clearAllDone(): Observable<Todo[]> {
-    if (!this.todos) {
-      return this.getTodos();
-    }
     const notDoneTodos = this.todos.filter((todo) => todo.done === false);
     this.todos = notDoneTodos;
-    this.saveLocalStorage();
-    return this.getTodos();
+    return this.getTodosObservable();
   }
 
   private loadLocalStorage() {
@@ -69,16 +62,11 @@ export class TodoService {
   }
 
   private saveLocalStorage() {
-    localStorage.setItem(LOCAL_STORAGE_ITEM, JSON.stringify(this.todos));
+    localStorage.setItem(LOCAL_STORAGE_ITEM, JSON.stringify(this.todos$.value));
   }
 
   private generateId(): number {
-    if (this.todos === undefined) {
-      console.error('generateId() called before loading data');
-      return 1;
-    }
-    return this.todos?.length > 0
-      ? this.todos[this.todos.length - 1].id + 1
-      : 1;
+    const todos = this.todos$.value;
+    return todos?.length > 0 ? todos[todos.length - 1].id + 1 : 1;
   }
 }

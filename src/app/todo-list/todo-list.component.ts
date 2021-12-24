@@ -23,7 +23,9 @@ export class TodoListComponent implements OnInit {
   constructor(private todoService: TodoService) {}
 
   ngOnInit(): void {
-    this.todoService.getTodos().subscribe((todos) => (this.todos = todos));
+    this.todoService
+      .getTodosObservable()
+      .subscribe((todos) => (this.todos = todos));
   }
 
   _selectedTodo?: number;
@@ -164,7 +166,7 @@ export class TodoListComponent implements OnInit {
   }
 
   newTodo(label: string) {
-    this.todoService.addTodo(label).subscribe();
+    this.todoService.addTodo(label);
     this.isInputDisplayed = false;
   }
 
