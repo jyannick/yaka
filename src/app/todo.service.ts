@@ -40,12 +40,13 @@ export class TodoService {
       done: false,
     };
     this.todos.push(newTodo);
-    this.saveLocalStorage(); // adding an element to the array does not trigger the setter
+    this.saveLocalStorage(); // just modifying the array does not trigger the setter
   }
 
   deleteIfDone(index: number) {
     if (this.todos[index].done) {
       this.todos.splice(index, 1);
+      this.saveLocalStorage(); // just modifying the array does not trigger the setter
     }
   }
 
