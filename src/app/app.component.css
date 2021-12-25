@@ -38,6 +38,9 @@ body {
   margin-left: 0.3rem;
 }
 
-.button:hover {
-  color: #c0c0c0;
+@media (hover: hover) {
+  /* @media to prevent "stuck" hover on touch screens */
+  .button:hover {
+    color: #c0c0c0;
+  }
 }
