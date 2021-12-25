@@ -26,6 +26,8 @@ function createMainWindow() {
     y: 0,
     autoHideMenuBar: true,
     skipTaskbar: true,
+    backgroundColor: "#1e1e1e",
+    show: false,
   });
   win.on("close", function (event) {
     if (!quitting) {
@@ -41,6 +43,9 @@ function createMainWindow() {
       slashes: true,
     })
   );
+  win.once("ready-to-show", () => {
+    win.show();
+  });
 }
 
 function registerKeyboardShortcut() {
@@ -62,7 +67,7 @@ function setupTrayIcon() {
       },
     },
   ]);
-  tray.on("click", () => win.show());
+  tray.on("click", () => (win.isVisible() ? win.hide() : win.show()));
   tray.setContextMenu(contextMenu);
   tray.setToolTip("Yaka: the no fuss todo-list manager");
   tray.setTitle("Yaka");
