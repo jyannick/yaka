@@ -1,13 +1,15 @@
-<div class="container" *ngIf="isDisplayed">
-  <rmx-icon name="close-fill" (click)="close()" class="close"></rmx-icon>
-  <ul>
-    <li *ngFor="let action of actions">
-      <p class="action">
-        {{ action.name }}: <b>{{ action.shortcut }}</b>
-      </p>
-      <p class="details">
-        {{ action.details }}
-      </p>
-    </li>
-  </ul>
+<div class="flex-container" *ngIf="isDisplayed">
+  <div class="panel">
+    <rmx-icon name="close-fill" (click)="close()" class="close"></rmx-icon>
+    <ul>
+      <li *ngFor="let action of actions">
+        <p class="action">
+          {{ action.name }}: <b>{{ action.shortcut }}</b>
+        </p>
+        <p class="details">
+          {{ action.details }}
+        </p>
+      </li>
+    </ul>
+  </div>
 </div>
