@@ -20,6 +20,7 @@
   </span>
   <input
     *ngIf="displayEditor()"
+    class="todo-editor"
     [(ngModel)]="todo.label"
     (blur)="saveLabel()"
     autofocus
