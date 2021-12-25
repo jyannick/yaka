@@ -16,7 +16,8 @@ You can use Yaka without installing anything, just use [the webapp hosted on git
 
 If you want, you can install the Electron App to have a desktop version of Yaka. It is designed to always be a keypress away:
 
-- when minimized in the system tray, press `Ctrl-Alt-Y` to display the Yaka window
+- starts minimized in the system tray
+- at any time, press `Ctrl-Alt-Y` to display the Yaka window
 - once you are done with it, `Ctrl-W`, `Ctrl-M` or `Alt-F4` will send it back to the tray
 - to close it, right-click on the icon in the tray and select `Quit`
 

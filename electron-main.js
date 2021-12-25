@@ -7,16 +7,22 @@ const {
   nativeImage,
   Menu,
 } = require("electron");
+const { autoUpdater } = require("electron-updater");
 const url = require("url");
 const path = require("path");
+const fs = require("fs");
 
 let tray; // declared outside onReady() to prevent tray icon disappearance due to garbage collection
 let quitting = false;
+let rootDir = fs.existsSync(path.join(__dirname, "dist/yaka/index.html"))
+  ? path.join(__dirname, "dist/yaka")
+  : __dirname;
 
 function onReady() {
   createMainWindow();
   registerKeyboardShortcut();
   setupTrayIcon();
+  autoUpdater.checkForUpdatesAndNotify();
 }
 
 function createMainWindow() {
@@ -39,7 +45,7 @@ function createMainWindow() {
   });
   win.loadURL(
     url.format({
-      pathname: path.join(__dirname, "dist/yaka/index.html"),
+      pathname: path.join(rootDir, "index.html"),
       protocol: "file:",
       slashes: true,
     })
@@ -56,7 +62,9 @@ function registerKeyboardShortcut() {
 }
 
 function setupTrayIcon() {
-  const icon = nativeImage.createFromPath("dist/yaka/assets/tray-icon.png");
+  const icon = nativeImage.createFromPath(
+    path.join(rootDir, "assets/tray-icon.png")
+  );
   tray = new Tray(icon);
   const contextMenu = Menu.buildFromTemplate([
     { label: "Open", click: () => win.show() },
