@@ -1,6 +1,17 @@
+.container {
+  display: flex;
+  height: fit-content;
+}
+
 input {
-  width: 100%;
+  flex: 5;
   background-color: #007acc;
   border: none;
+  border-radius: 5px;
   color: white;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  font-size: medium;
+  font-weight: bold;
+  margin: 0.3rem;
+  padding: 0.3rem;
 }

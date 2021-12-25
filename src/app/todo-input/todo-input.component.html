@@ -1,7 +1,9 @@
-<input
-  [(ngModel)]="label"
-  (keyup.enter)="createTodo()"
-  (blur)="emitCancel()"
-  placeholder="yaka"
-  autofocus
-/>
+<div class="container">
+  <input
+    [(ngModel)]="label"
+    (keyup.enter)="createTodo()"
+    (blur)="emitCancel()"
+    placeholder="yaka"
+    autofocus
+  />
+</div>
