@@ -1,10 +1,6 @@
 name: Build/release electron app via action-electron-builder
 
-on:
-  push:
-    branches:
-      - main
-      - release/*
+on: push
 
 jobs:
   release:
@@ -12,7 +8,7 @@ jobs:
 
     strategy:
       matrix:
-        os: [windows-latest, ubuntu-latest]
+        os: [windows-latest]
 
     steps:
       - name: Check out Git repository
@@ -23,7 +19,7 @@ jobs:
         with:
           node-version: 14.x
 
-      - name: Build/release Electron app
+      - name: Build Electron app (release=${{ startsWith(github.ref, 'refs/tags/v') }})
         uses: samuelmeuli/action-electron-builder@v1
         with:
           # GitHub token, automatically provided to the action
