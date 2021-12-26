@@ -8,7 +8,6 @@ const {
   Menu,
 } = require("electron");
 const { autoUpdater } = require("electron-updater");
-const url = require("url");
 const path = require("path");
 const fs = require("fs");
 
@@ -35,13 +34,7 @@ function createMainWindow() {
     backgroundColor: "#1e1e1e",
     show: false,
   });
-  win.loadURL(
-    url.format({
-      pathname: path.join(rootDir, "index.html"),
-      protocol: "file:",
-      slashes: true,
-    })
-  );
+  win.loadURL(path.join(rootDir, "index.html"));
   win.once("ready-to-show", () => {
     win.show();
   });
