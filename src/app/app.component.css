@@ -7,6 +7,8 @@ html {
 
 body {
   height: 100%;
+  margin: 0;
+  padding: 0;
 }
 
 .container {
@@ -24,23 +26,42 @@ body {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  align-items: center;
   color: grey;
+  background-color: #333333;
+  height: 30px;
 }
 
-.logo {
-  font-size: larger;
-  flex-grow: 1;
+.title {
+  margin-left: 0.5rem;
+  text-align: center;
+}
+
+.electron-move-window {
+  -webkit-user-select: none;
+  user-select: none;
+  -webkit-app-region: drag;
+}
+
+.electron-controls-placeholder {
+  width: 138px;
+}
+
+.spacer {
+  flex-grow: 5;
 }
 
 .button {
-  color: #333333;
+  color: #858585;
   cursor: pointer;
   margin-left: 0.3rem;
+  width: 18px !important;
+  height: 18px !important;
 }
 
 @media (hover: hover) {
   /* @media to prevent "stuck" hover on touch screens */
   .button:hover {
-    color: #c0c0c0;
+    color: #cccccc;
   }
 }

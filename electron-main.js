@@ -31,6 +31,11 @@ function createMainWindow() {
     y: 0,
     autoHideMenuBar: true,
     skipTaskbar: true,
+    titleBarStyle: "hidden",
+    titleBarOverlay: {
+      color: "#333333",
+      symbolColor: "#858585",
+    },
     backgroundColor: "#1e1e1e",
     show: false,
   });

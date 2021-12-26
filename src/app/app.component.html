@@ -1,6 +1,12 @@
 <div class="container">
   <div class="toolbar">
-    <span class="logo">Yaka!</span>
+    <span class="logo"></span>
+    <rmx-icon
+      name="delete-bin-2-fill"
+      title="Remove all 'done' tasks"
+      (click)="cleanAllDoneTasks()"
+      class="button"
+    ></rmx-icon>
     <a href="https://github.com/jyannick/yaka">
       <rmx-icon
         name="git-branch-fill"
@@ -14,12 +20,8 @@
       (click)="toggleHelpScreen()"
       class="button"
     ></rmx-icon>
-    <rmx-icon
-      name="delete-bin-2-fill"
-      title="Remove all 'done' tasks"
-      (click)="cleanAllDoneTasks()"
-      class="button"
-    ></rmx-icon>
+    <div class="spacer electron-move-window title">Yaka!</div>
+    <div class="electron-controls-placeholder"></div>
   </div>
   <yaka-todo-list [(isInputDisplayed)]="todoInput"></yaka-todo-list>
   <div *ngIf="!todoInput" (click)="showInput()" class="input-toggle"></div>
