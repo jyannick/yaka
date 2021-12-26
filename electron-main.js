@@ -13,7 +13,6 @@ const path = require("path");
 const fs = require("fs");
 
 let tray; // declared outside onReady() to prevent tray icon disappearance due to garbage collection
-let quitting = false;
 let rootDir = fs.existsSync(path.join(__dirname, "dist/yaka/index.html"))
   ? path.join(__dirname, "dist/yaka")
   : __dirname;
@@ -36,13 +35,6 @@ function createMainWindow() {
     backgroundColor: "#1e1e1e",
     show: false,
   });
-  win.on("close", function (event) {
-    if (!quitting) {
-      event.preventDefault();
-      win.hide();
-      return false;
-    }
-  });
   win.loadURL(
     url.format({
       pathname: path.join(rootDir, "index.html"),
@@ -55,10 +47,16 @@ function createMainWindow() {
   });
 }
 
-function registerKeyboardShortcut() {
-  globalShortcut.register("Control+Alt+Y", () => {
+function toggleWindowVisibility() {
+  if (win.isVisible()) {
+    win.hide();
+  } else {
     win.show();
-  });
+  }
+}
+
+function registerKeyboardShortcut() {
+  globalShortcut.register("Control+Alt+Y", toggleWindowVisibility);
 }
 
 function setupTrayIcon() {
@@ -71,12 +69,11 @@ function setupTrayIcon() {
     {
       label: "Quit",
       click: () => {
-        quitting = true;
         win.close();
       },
     },
   ]);
-  tray.on("click", () => (win.isVisible() ? win.hide() : win.show()));
+  tray.on("click", toggleWindowVisibility);
   tray.setContextMenu(contextMenu);
   tray.setToolTip("Yaka: the no fuss todo-list manager");
   tray.setTitle("Yaka");

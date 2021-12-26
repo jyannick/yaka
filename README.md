@@ -18,8 +18,7 @@ If you want, you can install the Electron App to have a desktop version of Yaka.
 
 - starts minimized in the system tray
 - at any time, press `Ctrl-Alt-Y` to display the Yaka window
-- once you are done with it, `Ctrl-W`, `Ctrl-M` or `Alt-F4` will send it back to the tray
-- to close it, right-click on the icon in the tray and select `Quit`
+- once you are done with it, `Ctrl-Alt-Y` will send it back to the tray
 
 This allows you to interact with your todo-list from anywhere, without having to grab the mouse.
 
