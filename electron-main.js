@@ -73,7 +73,7 @@ function setupTrayIcon() {
   ]);
   tray.on("click", toggleWindowVisibility);
   tray.setContextMenu(contextMenu);
-  tray.setToolTip("Yaka: the no fuss todo-list manager");
+  tray.setToolTip(`${app.getName()} v${app.getVersion()}`);
   tray.setTitle("Yaka");
 }
 
