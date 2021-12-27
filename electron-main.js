@@ -10,6 +10,7 @@ const {
 const { autoUpdater } = require("electron-updater");
 const path = require("path");
 const fs = require("fs");
+var AutoLaunch = require("auto-launch");
 
 let tray; // declared outside onReady() to prevent tray icon disappearance due to garbage collection
 let rootDir = fs.existsSync(path.join(__dirname, "dist/yaka/index.html"))
@@ -19,6 +20,7 @@ let rootDir = fs.existsSync(path.join(__dirname, "dist/yaka/index.html"))
 function onReady() {
   createMainWindow();
   registerKeyboardShortcut();
+  setupAutoLaunch();
   setupTrayIcon();
   autoUpdater.checkForUpdatesAndNotify();
 }
@@ -57,6 +59,13 @@ function toggleWindowVisibility() {
 
 function registerKeyboardShortcut() {
   globalShortcut.register("Control+Alt+Y", toggleWindowVisibility);
+}
+
+function setupAutoLaunch() {
+  var autoLauncher = new AutoLaunch({
+    name: "Yaka",
+  });
+  autoLauncher.enable();
 }
 
 function setupTrayIcon() {
