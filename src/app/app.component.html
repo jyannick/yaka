@@ -1,26 +1,25 @@
 <div class="container">
   <div class="toolbar">
-    <span class="logo"></span>
-    <rmx-icon
-      name="delete-bin-2-fill"
-      title="Remove all 'done' tasks"
-      (click)="cleanAllDoneTasks()"
-      class="button"
-    ></rmx-icon>
-    <a href="https://github.com/jyannick/yaka" target="_blank">
-      <rmx-icon
-        name="git-branch-fill"
-        title="Source code"
+    <div class="buttons">
+      <div
         class="button"
-      ></rmx-icon>
-    </a>
-    <rmx-icon
-      name="question-fill"
-      title="Help"
-      (click)="toggleHelpScreen()"
-      class="button"
-    ></rmx-icon>
-    <div class="spacer electron-move-window title">Yaka!</div>
+        title="Remove all 'done' tasks"
+        (click)="cleanAllDoneTasks()"
+      >
+        <rmx-icon name="delete-bin-2-line" class="button-icon"></rmx-icon>
+      </div>
+      <div class="button" title="Help" (click)="toggleHelpScreen()">
+        <rmx-icon name="keyboard-line" class="button-icon"></rmx-icon>
+      </div>
+      <div class="button" title="Website">
+        <a href="https://github.com/jyannick/yaka" target="_blank">
+          <rmx-icon name="question-mark" class="button-icon"></rmx-icon>
+        </a>
+      </div>
+    </div>
+    <div class="spacer electron-move-window">
+      <div class="title">Yaka!</div>
+    </div>
     <div class="electron-controls-placeholder"></div>
   </div>
   <yaka-todo-list [(isInputDisplayed)]="todoInput"></yaka-todo-list>

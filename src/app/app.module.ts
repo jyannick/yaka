@@ -5,10 +5,11 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import {
   RemixIconModule,
-  RiDeleteBin2Fill,
-  RiGitBranchFill,
-  RiCloseFill,
-  RiQuestionFill,
+  RiDeleteBin2Line,
+  RiKeyboardLine,
+  RiCloseLine,
+  RiQuestionLine,
+  RiQuestionMark,
 } from 'angular-remix-icon';
 
 import { AppComponent } from './app.component';
@@ -19,10 +20,11 @@ import { AutofocusDirective } from './autofocus.directive';
 import { HelpScreenComponent } from './help-screen/help-screen.component';
 
 const icons = {
-  RiDeleteBin2Fill,
-  RiGitBranchFill,
-  RiCloseFill,
-  RiQuestionFill,
+  RiDeleteBin2Line,
+  RiKeyboardLine,
+  RiCloseLine,
+  RiQuestionLine,
+  RiQuestionMark
 };
 
 @NgModule({

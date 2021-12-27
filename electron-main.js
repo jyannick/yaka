@@ -33,7 +33,7 @@ function createMainWindow() {
     height: 1080,
     x: 1920 - 400,
     y: 0,
-    minWidth: 250,
+    minWidth: 330,
     minHeight: 200,
     autoHideMenuBar: true,
     skipTaskbar: true,
