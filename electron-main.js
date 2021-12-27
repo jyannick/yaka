@@ -10,8 +10,10 @@ const {
 const { autoUpdater } = require("electron-updater");
 const path = require("path");
 const fs = require("fs");
+const Store = require("electron-store");
 var AutoLaunch = require("auto-launch");
 
+const store = new Store();
 let tray; // declared outside onReady() to prevent tray icon disappearance due to garbage collection
 let rootDir = fs.existsSync(path.join(__dirname, "dist/yaka/index.html"))
   ? path.join(__dirname, "dist/yaka")
@@ -45,7 +47,9 @@ function createMainWindow() {
   });
   win.loadURL(path.join(rootDir, "index.html"));
   win.once("ready-to-show", () => {
-    win.show();
+    if (!isAutoLaunchEnabled()) {
+      win.show();
+    }
   });
 }
 
@@ -57,6 +61,15 @@ function toggleWindowVisibility() {
   }
 }
 
+function isAutoLaunchEnabled() {
+  return store.get("autolaunch", false);
+}
+
+function setAutoLaunch(booleanValue) {
+  store.set("autolaunch", booleanValue);
+  setupAutoLaunch();
+}
+
 function registerKeyboardShortcut() {
   globalShortcut.register("Control+Alt+Y", toggleWindowVisibility);
 }
@@ -65,7 +78,15 @@ function setupAutoLaunch() {
   var autoLauncher = new AutoLaunch({
     name: "Yaka",
   });
-  autoLauncher.enable();
+  if (isAutoLaunchEnabled()) {
+    autoLauncher.enable();
+  } else {
+    autoLauncher.isEnabled().then((isEnabled) => {
+      if (isEnabled) {
+        autoLauncher.disable();
+      }
+    });
+  }
 }
 
 function setupTrayIcon() {
@@ -75,6 +96,12 @@ function setupTrayIcon() {
   tray = new Tray(icon);
   const contextMenu = Menu.buildFromTemplate([
     { label: "Open", click: () => win.show() },
+    {
+      label: "Launch on startup",
+      type: "checkbox",
+      checked: isAutoLaunchEnabled(),
+      click: (menuItem) => setAutoLaunch(menuItem.checked),
+    },
     {
       label: "Quit",
       click: () => {
