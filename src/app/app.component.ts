@@ -29,4 +29,8 @@ export class AppComponent {
   toggleHelpScreen() {
     this.helpScreen = !this.helpScreen;
   }
+
+  goToWebsite() {
+    window.open('https://github.com/jyannick/yaka');
+  }
 }
