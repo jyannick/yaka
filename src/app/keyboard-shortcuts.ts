@@ -9,6 +9,7 @@ export const UNMARK_AS_DONE = 'control.shift.d';
 export const EDIT = 'control.e';
 export const DELETE_SELECTION = 'control.delete';
 export const DELETE_ALL = 'control.shift.delete';
+export const HELP_SCREEN = 'control.h';
 
 export interface Action {
   name: string;
@@ -61,5 +62,10 @@ export const ACTIONS: Action[] = [
     name: 'cleanup all done items',
     shortcut: DELETE_ALL,
     details: 'all done items will be lost forever',
+  },
+  {
+    name: 'show this help screen',
+    shortcut: HELP_SCREEN,
+    details: 'press again to go back to the main screen',
   },
 ];

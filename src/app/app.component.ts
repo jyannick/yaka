@@ -1,4 +1,5 @@
-import { Component, ViewEncapsulation } from '@angular/core';
+import { Component, HostListener, ViewEncapsulation } from '@angular/core';
+import { HELP_SCREEN } from './keyboard-shortcuts';
 import { TodoService } from './todo.service';
 
 @Component({
@@ -26,7 +27,9 @@ export class AppComponent {
     this.todoService.clearAllDone();
   }
 
-  toggleHelpScreen() {
+  @HostListener(`document:keydown.${HELP_SCREEN}`, ['$event'])
+  toggleHelpScreen(event?: Event) {
+    event?.preventDefault();
     this.helpScreen = !this.helpScreen;
   }
 
