@@ -14,6 +14,7 @@ import {
   DELETE_ALL,
   DELETE_SELECTION,
   EDIT,
+  EXPORT_JSON,
   MARK_AS_DONE,
   NEXT_ITEM,
   NEXT_ITEM2,
@@ -178,6 +179,15 @@ export class TodoListComponent implements OnInit {
     this.todoService.clearAllDone().subscribe((todos) => (this.todos = todos));
   }
 
+  @HostListener(`document:keydown.${EXPORT_JSON}`, ['$event'])
+  exportJson(event?: Event) {
+    event?.preventDefault();
+    var link = document.createElement('a');
+    link.href = this.generateJsonUrl();
+    link.download = 'yaka-tasks.json';
+    link.click();
+  }
+
   newTodo(label: string) {
     this.todoService.addTodo(label);
     this.isInputDisplayed = false;
@@ -198,5 +208,12 @@ export class TodoListComponent implements OnInit {
 
   save() {
     this.todoService.save(this.todos);
+  }
+
+  generateJsonUrl() {
+    return (
+      'data:text/json;charset=UTF-8,' +
+      encodeURIComponent(JSON.stringify(this.todos, null, '\t'))
+    );
   }
 }

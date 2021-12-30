@@ -9,6 +9,7 @@ export const UNMARK_AS_DONE = 'control.shift.d';
 export const EDIT = 'control.e';
 export const DELETE_SELECTION = 'control.delete';
 export const DELETE_ALL = 'control.shift.delete';
+export const EXPORT_JSON = 'control.e';
 export const HELP_SCREEN = 'control.h';
 
 export interface Action {
@@ -62,6 +63,11 @@ export const ACTIONS: Action[] = [
     name: 'cleanup all done items',
     shortcut: DELETE_ALL,
     details: 'all done items will be lost forever',
+  },
+  {
+    name: 'download JSON',
+    shortcut: EXPORT_JSON,
+    details: 'all items will be exported to a file',
   },
   {
     name: 'show this help screen',
