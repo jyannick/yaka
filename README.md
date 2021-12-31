@@ -16,11 +16,11 @@ You can use Yaka without installing anything, just use [the webapp hosted on git
 
 If you want, you can install the Electron App to have a desktop version of Yaka. It is designed to always be a keypress away:
 
-- starts minimized in the system tray
+- option to start minimized in the system tray at computer startup
 - at any time, press `Ctrl-Alt-Y` to display the Yaka window
 - once you are done with it, `Ctrl-Alt-Y` will send it back to the tray
 
-This allows you to interact with your todo-list from anywhere, without having to grab the mouse.
+This allows you to interact with your todo-list from anywhere, without having to reach for the mouse.
 
 ## Privacy
 
