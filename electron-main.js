@@ -30,9 +30,7 @@ function onReady() {
 function createMainWindow() {
   win = new BrowserWindow({
     width: 400,
-    height: 1080,
-    x: 1920 - 400,
-    y: 0,
+    height: 600,
     minWidth: 330,
     minHeight: 200,
     autoHideMenuBar: true,
