@@ -28,7 +28,7 @@ body {
   align-items: stretch;
   color: grey;
   background-color: #333333;
-  height: 30px;
+  min-height: 30px;
 }
 
 .title {
