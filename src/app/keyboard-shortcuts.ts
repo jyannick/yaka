@@ -13,7 +13,7 @@ export const MOVE_ITEM_BOTTOM = 'control.shift.arrowdown';
 export const EDIT = 'control.e';
 export const DELETE_SELECTION = 'control.delete';
 export const DELETE_ALL = 'control.shift.delete';
-export const EXPORT_JSON = 'control.e';
+export const EXPORT_JSON = 'control.shift.e';
 export const HELP_SCREEN = 'control.h';
 
 export interface Action {
