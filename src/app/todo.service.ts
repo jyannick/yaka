@@ -56,6 +56,40 @@ export class TodoService {
     return this.getTodosObservable();
   }
 
+  moveToTop(index: number) {
+    if (index < 0 || this.todos.length <= index) {
+      console.error(
+        `Error in 'moveToTop': index ${index} not inside array ${this.todos}`
+      );
+      return;
+    }
+    const itemToMove = this.todos[index];
+    this.todos.splice(index, 1);
+    const newArray = [itemToMove, ...this.todos];
+    this.todos = newArray;
+  }
+
+  moveToBottom(index: number) {
+    if (index < 0 || this.todos.length <= index) {
+      console.error(
+        `Error in 'moveToBottom': index ${index} not inside array ${this.todos}`
+      );
+      return;
+    }
+    const itemToMove = this.todos[index];
+    this.todos.splice(index, 1);
+    const newArray = [...this.todos, itemToMove];
+    this.todos = newArray;
+  }
+
+  swapPositions(index_before: number, index_after: number) {
+    [this.todos[index_before], this.todos[index_after]] = [
+      this.todos[index_after],
+      this.todos[index_before],
+    ];
+    this.saveLocalStorage(); // just modifying the array does not trigger the setter
+  }
+
   private loadLocalStorage() {
     const savedTodos = localStorage.getItem(LOCAL_STORAGE_ITEM);
     this.todos = savedTodos

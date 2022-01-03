@@ -6,6 +6,10 @@ export const PREVIOUS_ITEM2 = 'control.k';
 export const CANCEL = 'escape';
 export const MARK_AS_DONE = 'control.d';
 export const UNMARK_AS_DONE = 'control.shift.d';
+export const MOVE_ITEM_UP = 'control.arrowup';
+export const MOVE_ITEM_DOWN = 'control.arrowdown';
+export const MOVE_ITEM_TOP = 'control.shift.arrowup';
+export const MOVE_ITEM_BOTTOM = 'control.shift.arrowdown';
 export const EDIT = 'control.e';
 export const DELETE_SELECTION = 'control.delete';
 export const DELETE_ALL = 'control.shift.delete';
@@ -47,6 +51,26 @@ export const ACTIONS: Action[] = [
   {
     name: 'unmark as done',
     shortcut: UNMARK_AS_DONE,
+    details: 'applies to currently selected item',
+  },
+  {
+    name: 'move up',
+    shortcut: MOVE_ITEM_UP,
+    details: 'applies to currently selected item',
+  },
+  {
+    name: 'move down',
+    shortcut: MOVE_ITEM_DOWN,
+    details: 'applies to currently selected item',
+  },
+  {
+    name: 'move to top of list',
+    shortcut: MOVE_ITEM_TOP,
+    details: 'applies to currently selected item',
+  },
+  {
+    name: 'move to bottom of list',
+    shortcut: MOVE_ITEM_BOTTOM,
     details: 'applies to currently selected item',
   },
   {

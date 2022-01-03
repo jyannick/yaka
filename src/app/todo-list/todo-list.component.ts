@@ -22,6 +22,10 @@ import {
   PREVIOUS_ITEM2,
   TOGGLE_TASK_INPUT,
   UNMARK_AS_DONE,
+  MOVE_ITEM_UP,
+  MOVE_ITEM_DOWN,
+  MOVE_ITEM_TOP,
+  MOVE_ITEM_BOTTOM,
 } from '../keyboard-shortcuts';
 
 @Component({
@@ -147,6 +151,52 @@ export class TodoListComponent implements OnInit {
     } else {
       this.showInput();
     }
+  }
+
+  @HostListener(`document:keydown.${MOVE_ITEM_UP}`, ['$event'])
+  moveSelectedItemUp(event?: Event) {
+    event?.preventDefault();
+    if (this.selectedTodo === undefined || this.selectedTodo === 0) {
+      return;
+    }
+    this.todoService.swapPositions(this.selectedTodo, this.selectedTodo - 1);
+    this.selectedTodo--;
+  }
+
+  @HostListener(`document:keydown.${MOVE_ITEM_DOWN}`, ['$event'])
+  moveSelectedItemDown(event?: Event) {
+    event?.preventDefault();
+    if (
+      this.selectedTodo === undefined ||
+      this.selectedTodo === this.todos.length - 1
+    ) {
+      return;
+    }
+    this.todoService.swapPositions(this.selectedTodo, this.selectedTodo + 1);
+    this.selectedTodo++;
+  }
+
+  @HostListener(`document:keydown.${MOVE_ITEM_TOP}`, ['$event'])
+  moveSelectedItemToTop(event?: Event) {
+    event?.preventDefault();
+    if (this.selectedTodo === undefined || this.selectedTodo === 0) {
+      return;
+    }
+    this.todoService.moveToTop(this.selectedTodo);
+    this.selectedTodo = 0;
+  }
+
+  @HostListener(`document:keydown.${MOVE_ITEM_BOTTOM}`, ['$event'])
+  moveSelectedItemToBottom(event?: Event) {
+    event?.preventDefault();
+    if (
+      this.selectedTodo === undefined ||
+      this.selectedTodo === this.todos.length - 1
+    ) {
+      return;
+    }
+    this.todoService.moveToBottom(this.selectedTodo);
+    this.selectedTodo = this.todos.length - 1;
   }
 
   showInput(event?: Event) {
