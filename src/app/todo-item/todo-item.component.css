@@ -4,10 +4,11 @@
   align-items: center;
   height: 1.5rem;
   margin-right: 0.6rem;
+  cursor: all-scroll;
 }
 
 .checkbox {
-  cursor: pointer;
+  cursor: pointer !important;
 }
 
 .todo-text {
@@ -16,6 +17,7 @@
   margin-top: 2px;
   margin-bottom: 2px;
   transition-duration: 600ms;
+  cursor: text !important;
 }
 
 .todo-editor {

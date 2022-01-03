@@ -11,6 +11,7 @@ import {
   RiQuestionLine,
   RiQuestionMark,
 } from 'angular-remix-icon';
+import { DragDropModule } from '@angular/cdk/drag-drop';
 
 import { AppComponent } from './app.component';
 import { TodoListComponent } from './todo-list/todo-list.component';
@@ -24,7 +25,7 @@ const icons = {
   RiKeyboardLine,
   RiCloseLine,
   RiQuestionLine,
-  RiQuestionMark
+  RiQuestionMark,
 };
 
 @NgModule({
@@ -41,6 +42,7 @@ const icons = {
     FormsModule,
     BrowserAnimationsModule,
     RemixIconModule.configure(icons),
+    DragDropModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

@@ -7,6 +7,8 @@ import {
   Output,
 } from '@angular/core';
 
+import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
+
 import { TodoService } from '../todo.service';
 import { Todo } from '../todo';
 import {
@@ -265,5 +267,25 @@ export class TodoListComponent implements OnInit {
       'data:text/json;charset=UTF-8,' +
       encodeURIComponent(JSON.stringify(this.todos, null, '\t'))
     );
+  }
+
+  dragAndDrop(event: CdkDragDrop<string[]>) {
+    moveItemInArray(this.todos, event.previousIndex, event.currentIndex);
+    this.save();
+    if (this.selectedTodo !== undefined) {
+      if (this.selectedTodo === event.previousIndex) {
+        this.selectedTodo = event.currentIndex;
+      } else if (
+        this.selectedTodo <= event.previousIndex &&
+        event.currentIndex <= this.selectedTodo
+      ) {
+        this.selectedTodo++;
+      } else if (
+        this.selectedTodo >= event.previousIndex &&
+        event.currentIndex >= this.selectedTodo
+      ) {
+        this.selectedTodo--;
+      }
+    }
   }
 }

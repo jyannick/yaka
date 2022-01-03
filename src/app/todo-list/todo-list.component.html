@@ -1,5 +1,5 @@
-<ul class="todos">
-  <li *ngFor="let todo of todos; let index = index">
+<ul cdkDropList (cdkDropListDropped)="dragAndDrop($event)" class="todos">
+  <li cdkDrag *ngFor="let todo of todos; let index = index">
     <yaka-todo-item
       [(todo)]="todos[index]"
       (todoChange)="save()"
