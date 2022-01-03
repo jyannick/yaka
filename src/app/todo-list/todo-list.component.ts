@@ -161,7 +161,7 @@ export class TodoListComponent implements OnInit {
     if (this.selectedTodo === undefined || this.selectedTodo === 0) {
       return;
     }
-    this.todoService.swapPositions(this.selectedTodo, this.selectedTodo - 1);
+    this.todoService.moveItem(this.selectedTodo, this.selectedTodo - 1);
     this.selectedTodo--;
   }
 
@@ -174,7 +174,7 @@ export class TodoListComponent implements OnInit {
     ) {
       return;
     }
-    this.todoService.swapPositions(this.selectedTodo, this.selectedTodo + 1);
+    this.todoService.moveItem(this.selectedTodo, this.selectedTodo + 1);
     this.selectedTodo++;
   }
 

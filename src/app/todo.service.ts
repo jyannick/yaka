@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 
 import { BehaviorSubject, Observable } from 'rxjs';
+import { moveItemInArray } from '@angular/cdk/drag-drop';
 
 import { Todo } from './todo';
 
@@ -57,36 +58,15 @@ export class TodoService {
   }
 
   moveToTop(index: number) {
-    if (index < 0 || this.todos.length <= index) {
-      console.error(
-        `Error in 'moveToTop': index ${index} not inside array ${this.todos}`
-      );
-      return;
-    }
-    const itemToMove = this.todos[index];
-    this.todos.splice(index, 1);
-    const newArray = [itemToMove, ...this.todos];
-    this.todos = newArray;
+    this.moveItem(index, 0);
   }
 
   moveToBottom(index: number) {
-    if (index < 0 || this.todos.length <= index) {
-      console.error(
-        `Error in 'moveToBottom': index ${index} not inside array ${this.todos}`
-      );
-      return;
-    }
-    const itemToMove = this.todos[index];
-    this.todos.splice(index, 1);
-    const newArray = [...this.todos, itemToMove];
-    this.todos = newArray;
+    this.moveItem(index, this.todos.length - 1);
   }
 
-  swapPositions(index_before: number, index_after: number) {
-    [this.todos[index_before], this.todos[index_after]] = [
-      this.todos[index_after],
-      this.todos[index_before],
-    ];
+  moveItem(fromIndex: number, toIndex: number) {
+    moveItemInArray(this.todos, fromIndex, toIndex);
     this.saveLocalStorage(); // just modifying the array does not trigger the setter
   }
 
