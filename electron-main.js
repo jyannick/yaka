@@ -29,7 +29,7 @@ function onReady() {
 
 function createMainWindow() {
   win = new BrowserWindow({
-    width: 400,
+    width: 800,
     height: 600,
     minWidth: 330,
     minHeight: 200,
