@@ -18,6 +18,9 @@
   margin-bottom: 2px;
   transition-duration: 600ms;
   cursor: text !important;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .todo-editor {
