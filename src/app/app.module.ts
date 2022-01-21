@@ -19,6 +19,7 @@ import { TodoItemComponent } from './todo-item/todo-item.component';
 import { TodoInputComponent } from './todo-input/todo-input.component';
 import { AutofocusDirective } from './autofocus.directive';
 import { HelpScreenComponent } from './help-screen/help-screen.component';
+import { ToolbarComponent } from './toolbar/toolbar.component';
 
 const icons = {
   RiDeleteBin2Line,
@@ -36,6 +37,7 @@ const icons = {
     TodoInputComponent,
     AutofocusDirective,
     HelpScreenComponent,
+    ToolbarComponent,
   ],
   imports: [
     BrowserModule,

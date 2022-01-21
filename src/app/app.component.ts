@@ -11,9 +11,8 @@ import { TodoService } from './todo.service';
 export class AppComponent {
   title = 'yaka';
   todoInput = false;
-  helpScreen = false;
 
-  constructor(private todoService: TodoService) {}
+  constructor() {}
 
   showInput() {
     this.todoInput = true;
@@ -21,19 +20,5 @@ export class AppComponent {
 
   hideInput() {
     this.todoInput = false;
-  }
-
-  cleanAllDoneTasks() {
-    this.todoService.clearAllDone();
-  }
-
-  @HostListener(`document:keydown.${HELP_SCREEN}`, ['$event'])
-  toggleHelpScreen(event?: Event) {
-    event?.preventDefault();
-    this.helpScreen = !this.helpScreen;
-  }
-
-  goToWebsite() {
-    window.open('https://github.com/jyannick/yaka');
   }
 }

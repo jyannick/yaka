@@ -1,0 +1,22 @@
+<div class="toolbar">
+  <div class="buttons">
+    <div
+      class="button"
+      title="Remove all 'done' tasks"
+      (click)="cleanAllDoneTasks()"
+    >
+      <rmx-icon name="delete-bin-2-line" class="button-icon"></rmx-icon>
+    </div>
+    <div class="button" title="Help" (click)="toggleHelpScreen()">
+      <rmx-icon name="keyboard-line" class="button-icon"></rmx-icon>
+    </div>
+    <div class="button" title="Website" (click)="goToWebsite()">
+      <rmx-icon name="question-mark" class="button-icon"></rmx-icon>
+    </div>
+  </div>
+  <div class="spacer electron-move-window">
+    <div class="title">Yaka!</div>
+  </div>
+  <div class="electron-controls-placeholder"></div>
+</div>
+<yaka-help-screen [(isDisplayed)]="helpScreen"></yaka-help-screen>

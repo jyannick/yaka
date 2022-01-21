@@ -1,0 +1,61 @@
+.toolbar {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: stretch;
+  color: grey;
+  background-color: #333333;
+  min-height: 30px;
+}
+
+.title {
+  text-align: center;
+}
+
+.buttons {
+  width: 138px;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: stretch;
+}
+
+.button {
+  cursor: pointer;
+  margin-left: 0.3rem;
+  flex-grow: 5;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0;
+}
+
+.button-icon {
+  color: #858585;
+  width: 16px !important;
+  height: 16px !important;
+}
+
+@media (hover: hover) {
+  /* @media to prevent "stuck" hover on touch screens */
+  .button:hover {
+    color: #cccccc;
+    background-color: #4e4e4e;
+  }
+}
+
+.spacer {
+  flex-grow: 5;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.electron-move-window {
+  -webkit-user-select: none;
+  user-select: none;
+  -webkit-app-region: drag;
+}
+
+.electron-controls-placeholder {
+  width: 138px;
+}
