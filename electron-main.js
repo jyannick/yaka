@@ -43,6 +43,7 @@ function createMainWindow() {
     },
     backgroundColor: "#1e1e1e",
     show: false,
+    frame: false,
   });
   indexUrl = new url.URL(`file://${rootDir}/index.html`);
   win.loadURL(indexUrl.href);
