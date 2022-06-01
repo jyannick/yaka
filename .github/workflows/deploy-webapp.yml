@@ -21,6 +21,7 @@ jobs:
 
       - name: Prepare and deploy
         env:
+          # https://github.com/angular-schule/angular-cli-ghpages/#continuous-delivery
           GH_TOKEN: ${{ secrets.GH_TOKEN }}
         run: |
           npm install
