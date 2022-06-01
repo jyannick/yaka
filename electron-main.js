@@ -9,6 +9,7 @@ const {
 } = require("electron");
 const { autoUpdater } = require("electron-updater");
 const path = require("path");
+const url = require("url");
 const fs = require("fs");
 const Store = require("electron-store");
 var AutoLaunch = require("auto-launch");
@@ -42,8 +43,10 @@ function createMainWindow() {
     },
     backgroundColor: "#1e1e1e",
     show: false,
+    frame: false,
   });
-  win.loadURL(path.join(rootDir, "index.html"));
+  indexUrl = new url.URL(`file://${rootDir}/index.html`);
+  win.loadURL(indexUrl.href);
   win.once("ready-to-show", () => {
     if (!isAutoLaunchEnabled()) {
       win.show();
