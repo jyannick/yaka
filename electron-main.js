@@ -76,9 +76,16 @@ function registerKeyboardShortcut() {
 }
 
 function setupAutoLaunch() {
-  var autoLauncher = new AutoLaunch({
-    name: "Yaka",
-  });
+  if (process.env.APPIMAGE) { // path auto-detection fails within an appimage
+    var autoLauncher = new AutoLaunch({
+      name: "Yaka",
+      path: process.env.APPIMAGE
+    });  
+  } else {
+    var autoLauncher = new AutoLaunch({
+      name: "Yaka",
+    });
+  }
   if (isAutoLaunchEnabled()) {
     autoLauncher.enable();
   } else {
