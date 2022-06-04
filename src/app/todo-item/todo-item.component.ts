@@ -24,6 +24,7 @@ export class TodoItemComponent {
 
   @Input() todo?: Todo;
   @Output() todoChange = new EventEmitter<Todo>();
+  @Output() flash = new EventEmitter<void>();
 
   private _isEditing: boolean = false;
 
@@ -43,6 +44,9 @@ export class TodoItemComponent {
 
   markDone() {
     this.modifyTodo((todo) => {
+      if (!todo.done) {
+        this.flash.emit();
+      }
       todo.done = true;
       return todo;
     });

@@ -3,6 +3,7 @@
     <yaka-todo-item
       [(todo)]="todos[index]"
       (todoChange)="save()"
+      (flash)="this.flash.emit();"
       [selected]="index === selectedTodo"
       [(isEditing)]="isEditing"
       (click)="selectTodo(index)"
