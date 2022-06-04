@@ -38,6 +38,7 @@ import {
 export class TodoListComponent implements OnInit {
   todos: Todo[] = [];
   @Output() isInputDisplayedChange = new EventEmitter<boolean>();
+  @Output() flash = new EventEmitter<void>();
   isEditing: boolean = false;
 
   constructor(private todoService: TodoService) {}
@@ -246,6 +247,9 @@ export class TodoListComponent implements OnInit {
   }
 
   markAsDone(index: number) {
+    if (!this.todos[index].done) {
+      this.flash.emit();
+    }
     this.todos[index].done = true;
     this.save();
   }
