@@ -1,6 +1,6 @@
-<div class="container">
+<div class="container" [@flash]="flashToggle ? 'idle1' : 'idle2'">
   <yaka-toolbar></yaka-toolbar>
-  <yaka-todo-list [(isInputDisplayed)]="todoInput"></yaka-todo-list>
+  <yaka-todo-list [(isInputDisplayed)]="todoInput" (flash)="flash()"></yaka-todo-list>
   <div *ngIf="!todoInput" (click)="showInput()" class="input-toggle"></div>
   <div *ngIf="todoInput" (click)="hideInput()" class="input-toggle"></div>
 </div>
