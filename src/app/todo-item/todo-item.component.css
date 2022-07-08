@@ -9,6 +9,7 @@
 
 .checkbox {
   cursor: pointer !important;
+  padding: 2px;
 }
 
 .todo-text {

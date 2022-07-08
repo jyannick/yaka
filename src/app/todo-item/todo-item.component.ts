@@ -59,6 +59,13 @@ export class TodoItemComponent {
     });
   }
 
+  markUnpaused() {
+    this.modifyTodo((todo) => {
+      todo.paused = false;
+      return todo;
+    })
+  }
+
   edit() {
     if (this.selected) {
       this.isEditing = true;

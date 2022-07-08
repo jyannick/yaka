@@ -39,6 +39,7 @@ export class TodoService {
       id: this.generateId(),
       label: label,
       done: false,
+      paused: false,
     };
     this.todos.push(newTodo);
     this.saveLocalStorage(); // just modifying the array does not trigger the setter

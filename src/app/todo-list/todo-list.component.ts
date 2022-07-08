@@ -28,6 +28,8 @@ import {
   MOVE_ITEM_DOWN,
   MOVE_ITEM_TOP,
   MOVE_ITEM_BOTTOM,
+  UNMARK_AS_PAUSED,
+  MARK_AS_PAUSED,
 } from '../keyboard-shortcuts';
 
 @Component({
@@ -135,6 +137,24 @@ export class TodoListComponent implements OnInit {
       return;
     }
     this.unmarkAsDone(this.selectedTodo);
+  }
+
+  @HostListener(`document:keydown.${MARK_AS_PAUSED}`, ['$event'])
+  markSelectionAsPaused(event?: Event) {
+    event?.preventDefault();
+    if (this.selectedTodo === undefined) {
+      return;
+    }
+    this.markAsPaused(this.selectedTodo);
+  }
+
+  @HostListener(`document:keydown.${UNMARK_AS_PAUSED}`, ['$event'])
+  unmarkSelectionAsPaused(event?: Event) {
+    event?.preventDefault();
+    if (this.selectedTodo === undefined) {
+      return;
+    }
+    this.unmarkAsPaused(this.selectedTodo);
   }
 
   @HostListener(`document:keydown.${EDIT}`, ['$event'])
@@ -259,6 +279,22 @@ export class TodoListComponent implements OnInit {
       return;
     }
     this.todos[index].done = false;
+    this.save();
+  }
+
+  markAsPaused(index: number) {
+    if (!this.todos) {
+      return;
+    }
+    this.todos[index].paused = true;
+    this.save();
+  }
+
+  unmarkAsPaused(index: number) {
+    if (!this.todos) {
+      return;
+    }
+    this.todos[index].paused = false;
     this.save();
   }
 

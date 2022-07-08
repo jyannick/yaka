@@ -6,6 +6,8 @@ export const PREVIOUS_ITEM2 = 'control.k';
 export const CANCEL = 'escape';
 export const MARK_AS_DONE = 'control.d';
 export const UNMARK_AS_DONE = 'control.shift.d';
+export const MARK_AS_PAUSED = 'control.p';
+export const UNMARK_AS_PAUSED = 'control.shift.p';
 export const MOVE_ITEM_UP = 'control.arrowup';
 export const MOVE_ITEM_DOWN = 'control.arrowdown';
 export const MOVE_ITEM_TOP = 'control.shift.arrowup';
@@ -51,6 +53,16 @@ export const ACTIONS: Action[] = [
   {
     name: 'unmark as done',
     shortcut: UNMARK_AS_DONE,
+    details: 'applies to currently selected item',
+  },
+  {
+    name: 'mark as paused',
+    shortcut: MARK_AS_PAUSED,
+    details: 'applies to currently selected item',
+  },
+  {
+    name: 'unmark as paused',
+    shortcut: UNMARK_AS_PAUSED,
     details: 'applies to currently selected item',
   },
   {

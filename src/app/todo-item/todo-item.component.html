@@ -10,6 +10,9 @@
   <span *ngIf="!todo.done" (click)="markDone()" @fadeIn class="checkbox">
     🔳
   </span>
+  <span *ngIf="todo.paused" (click)="markUnpaused()" @fadeIn class="checkbox">
+    ⏸️
+  </span>
   <span
     *ngIf="!displayEditor()"
     class="todo-text"
