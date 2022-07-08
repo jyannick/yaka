@@ -57,7 +57,7 @@
     "zone.js": "~0.11.4"
   },
   "devDependencies": {
-    "@angular-devkit/build-angular": "~13.0.4",
+    "@angular-devkit/build-angular": "^13.3.8",
     "@angular-eslint/builder": "13.0.1",
     "@angular-eslint/eslint-plugin": "13.0.1",
     "@angular-eslint/eslint-plugin-template": "13.0.1",
@@ -70,8 +70,8 @@
     "@typescript-eslint/eslint-plugin": "5.3.0",
     "@typescript-eslint/parser": "5.3.0",
     "angular-cli-ghpages": "^1.0.0",
-    "electron": "^16.0.5",
-    "electron-builder": "^22.14.5",
+    "electron": "^19.0.8",
+    "electron-builder": "^5.5.0",
     "eslint": "^8.2.0",
     "jasmine-core": "~3.10.0",
     "karma": "~6.3.0",
