@@ -13,6 +13,8 @@ import {
 } from 'angular-remix-icon';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 
+import { PickerModule } from '@ctrl/ngx-emoji-mart';
+
 import { AppComponent } from './app.component';
 import { TodoListComponent } from './todo-list/todo-list.component';
 import { TodoItemComponent } from './todo-item/todo-item.component';
@@ -45,6 +47,7 @@ const icons = {
     BrowserAnimationsModule,
     RemixIconModule.configure(icons),
     DragDropModule,
+    PickerModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

@@ -5,7 +5,8 @@ import {
   transition,
   trigger,
 } from '@angular/animations';
-import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { Component, Input, Output, EventEmitter, ViewChild, ElementRef, HostListener } from '@angular/core';
+import { EMOJI } from '../keyboard-shortcuts';
 import { Todo } from '../todo';
 
 @Component({
@@ -27,6 +28,7 @@ export class TodoItemComponent {
   @Output() flash = new EventEmitter<void>();
 
   private _isEditing: boolean = false;
+  private _isEmojiPickerDisplayed: boolean = false; 
 
   @Input()
   public get isEditing(): boolean {
@@ -39,6 +41,13 @@ export class TodoItemComponent {
   }
 
   @Output() isEditingChange = new EventEmitter<boolean>();
+
+  @ViewChild('todoEditor')
+  todoEditor!: ElementRef;
+
+  public get isEmojiPickerDisplayed(): boolean|undefined {
+    return this.selected && this._isEditing && this._isEmojiPickerDisplayed;
+  }
 
   constructor() {}
 
@@ -92,5 +101,28 @@ export class TodoItemComponent {
 
   displayEditor() {
     return this.selected && this.isEditing;
+  }
+
+  @HostListener(`document:keydown.${EMOJI}`, ['$event'])
+  userPressedEmoji(event?: Event) {
+    event?.preventDefault();
+    if (this.isEditing) {
+      this.toggleEmojiPicker();
+    }
+  }
+
+  toggleEmojiPicker() {
+    this._isEmojiPickerDisplayed = !this._isEmojiPickerDisplayed;
+  }
+
+  addEmoji(event: any) {
+    var cursorIndex = this.todoEditor.nativeElement.selectionStart;
+    this.modifyTodo((todo) => {
+      todo.label =  todo.label.slice(0, cursorIndex) + event.emoji.native + todo.label.slice(cursorIndex);
+      return todo;
+    })
+    this._isEmojiPickerDisplayed = false;
+    this.todoEditor.nativeElement.focus();
+    this.todoEditor.nativeElement.setSelectionRange(cursorIndex+1, cursorIndex+1); // FIXME does not seem to work
   }
 }

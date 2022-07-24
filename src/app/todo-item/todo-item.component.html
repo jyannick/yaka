@@ -21,12 +21,22 @@
   >
     {{ todo.label }}
   </span>
-  <input
-    *ngIf="displayEditor()"
-    class="todo-editor"
-    [(ngModel)]="todo.label"
-    (blur)="saveLabel()"
-    autofocus
-    (keydown.enter)="saveLabel()"
-  />
+  <span *ngIf="displayEditor()" (blur)="saveLabel()">
+    <input
+      class="todo-editor"
+      #todoEditor
+      [(ngModel)]="todo.label"
+      autofocus
+      (keydown.enter)="saveLabel()"
+    />
+    <span (click)="toggleEmojiPicker()"> ⁉️ </span>
+  </span>
 </div>
+<emoji-mart
+  *ngIf="this.isEmojiPickerDisplayed"
+  [autoFocus]="true"
+  (emojiSelect)="addEmoji($event)"
+  title="Pick your emoji"
+  emoji="arrow_up"
+  color="#007acc"
+></emoji-mart>

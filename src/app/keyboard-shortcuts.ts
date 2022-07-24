@@ -1,18 +1,19 @@
 export const TOGGLE_TASK_INPUT = 'control.space';
 export const NEXT_ITEM = 'arrowdown';
-export const NEXT_ITEM2 = 'control.j';
+export const NEXT_ITEM2 = 'control.n';
 export const PREVIOUS_ITEM = 'arrowup';
-export const PREVIOUS_ITEM2 = 'control.k';
+export const PREVIOUS_ITEM2 = 'control.p';
 export const CANCEL = 'escape';
 export const MARK_AS_DONE = 'control.d';
-export const UNMARK_AS_DONE = 'control.shift.d';
-export const MARK_AS_PAUSED = 'control.p';
+export const UNMARK_AS_DONE = 'alt.shift.d';
+export const MARK_AS_PAUSED = 'alt.p';
 export const UNMARK_AS_PAUSED = 'control.shift.p';
 export const MOVE_ITEM_UP = 'control.arrowup';
 export const MOVE_ITEM_DOWN = 'control.arrowdown';
 export const MOVE_ITEM_TOP = 'control.shift.arrowup';
 export const MOVE_ITEM_BOTTOM = 'control.shift.arrowdown';
 export const EDIT = 'control.e';
+export const EMOJI = 'control.j';
 export const DELETE_SELECTION = 'control.delete';
 export const DELETE_ALL = 'control.shift.delete';
 export const EXPORT_JSON = 'control.shift.e';
@@ -89,6 +90,11 @@ export const ACTIONS: Action[] = [
     name: 'edit',
     shortcut: EDIT,
     details: 'applies to currently selected item',
+  },
+  {
+    name: 'add emoji',
+    shortcut: EMOJI,
+    details: 'insert at current cursor position',
   },
   {
     name: 'delete selected item',
