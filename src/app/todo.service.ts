@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { moveItemInArray } from '@angular/cdk/drag-drop';
 
-import { Todo } from './todo';
+import { Todo, isATodo } from './todo';
 
 const LOCAL_STORAGE_ITEM = 'yaka-todos';
 
@@ -84,6 +84,40 @@ export class TodoService {
     link.click();
   }
 
+  importJson() {
+    var fileChooser = document.createElement('input');
+    fileChooser.type = "file";
+    fileChooser.accept = ".json";
+    fileChooser.onchange = (e: Event) => {
+      if (fileChooser.files){
+        this.readJson(fileChooser.files[0]);
+      }
+    }
+    fileChooser.click();
+  }
+
+  readJson(file: File) {
+    var reader = new FileReader();
+    reader.onload = () => {
+      const importedTodos = JSON.parse(String(reader.result));
+      if (!Array.isArray(importedTodos)) {
+        console.log("Incorrect value for imported TODOs:", importedTodos);
+        return;
+      }
+      let isFormatOk = true;
+      importedTodos.forEach((element: any) => {
+        if (!isATodo(element)){
+          console.log("Incorrect value for imported TODOs:", element);
+          isFormatOk = false;
+        }
+      });
+      if (isFormatOk) {
+        this.todos = importedTodos;
+      }
+    }
+    reader.readAsText(file);
+  }
+
   private loadLocalStorage() {
     const savedTodos = localStorage.getItem(LOCAL_STORAGE_ITEM);
     this.todos = savedTodos
@@ -100,3 +134,4 @@ export class TodoService {
     return todos?.length > 0 ? todos[todos.length - 1].id + 1 : 1;
   }
 }
+

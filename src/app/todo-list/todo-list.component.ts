@@ -17,6 +17,7 @@ import {
   DELETE_SELECTION,
   EDIT,
   EXPORT_JSON,
+  IMPORT_JSON,
   MARK_AS_DONE,
   NEXT_ITEM,
   NEXT_ITEM2,
@@ -236,6 +237,12 @@ export class TodoListComponent implements OnInit {
   exportJson(event?: Event) {
     event?.preventDefault();
     this.todoService.exportJson();
+  }
+
+  @HostListener(`document:keydown.${IMPORT_JSON}`, ['$event'])
+  importJson(event?: Event) {
+    event?.preventDefault();
+    this.todoService.importJson();
   }
 
   newTodo(label: string) {

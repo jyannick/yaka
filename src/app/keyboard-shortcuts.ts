@@ -14,6 +14,7 @@ export const EDIT = 'control.e';
 export const DELETE_SELECTION = 'control.delete';
 export const DELETE_ALL = 'control.shift.delete';
 export const EXPORT_JSON = 'control.shift.e';
+export const IMPORT_JSON = 'control.shift.i';
 export const HELP_SCREEN = 'control.h';
 
 export interface Action {
@@ -89,9 +90,14 @@ export const ACTIONS: Action[] = [
     details: 'all done items will be lost forever',
   },
   {
-    name: 'download JSON',
+    name: 'export JSON',
     shortcut: EXPORT_JSON,
     details: 'all items will be exported to a file',
+  },
+  {
+    name: 'import JSON',
+    shortcut: IMPORT_JSON,
+    details: 'all items from a file will be loaded',
   },
   {
     name: 'show this help screen',

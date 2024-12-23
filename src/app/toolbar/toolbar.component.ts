@@ -29,4 +29,8 @@ export class ToolbarComponent {
   exportTasks() {
     this.todoService.exportJson();
   }
+
+  importTasks() {
+    this.todoService.importJson();
+  }
 }
