@@ -10,6 +10,7 @@ import {
   RiCloseLine,
   RiQuestionLine,
   RiQuestionMark,
+  RiFileDownloadLine,
 } from 'angular-remix-icon';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 
@@ -27,6 +28,7 @@ const icons = {
   RiCloseLine,
   RiQuestionLine,
   RiQuestionMark,
+  RiFileDownloadLine,
 };
 
 @NgModule({

@@ -235,10 +235,7 @@ export class TodoListComponent implements OnInit {
   @HostListener(`document:keydown.${EXPORT_JSON}`, ['$event'])
   exportJson(event?: Event) {
     event?.preventDefault();
-    var link = document.createElement('a');
-    link.href = this.generateJsonUrl();
-    link.download = 'yaka-tasks.json';
-    link.click();
+    this.todoService.exportJson();
   }
 
   newTodo(label: string) {
@@ -264,13 +261,6 @@ export class TodoListComponent implements OnInit {
 
   save() {
     this.todoService.save(this.todos);
-  }
-
-  generateJsonUrl() {
-    return (
-      'data:text/json;charset=UTF-8,' +
-      encodeURIComponent(JSON.stringify(this.todos, null, '\t'))
-    );
   }
 
   dragAndDrop(event: CdkDragDrop<string[]>) {

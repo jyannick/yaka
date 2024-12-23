@@ -70,6 +70,20 @@ export class TodoService {
     this.saveLocalStorage(); // just modifying the array does not trigger the setter
   }
 
+  generateJsonUrl() {
+    return (
+      'data:text/json;charset=UTF-8,' +
+      encodeURIComponent(JSON.stringify(this.todos, null, '\t'))
+    );
+  }
+
+  exportJson() {
+    var link = document.createElement('a');
+    link.href = this.generateJsonUrl();
+    link.download = 'yaka-tasks.json';
+    link.click();
+  }
+
   private loadLocalStorage() {
     const savedTodos = localStorage.getItem(LOCAL_STORAGE_ITEM);
     this.todos = savedTodos

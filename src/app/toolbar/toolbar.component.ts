@@ -25,4 +25,8 @@ export class ToolbarComponent {
   cleanAllDoneTasks() {
     this.todoService.clearAllDone();
   }
+
+  exportTasks() {
+    this.todoService.exportJson();
+  }
 }
